@@ -1,0 +1,95 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font: 14px/1.5 Lato, sans-serif;
+}
+
+body, input, button{
+    font: inherit;
+}
+
+body{
+
+    background: #eee;
+    background-image: url(/EXAMM/photos/some-tale-TriXQTJ_4gk-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    padding: 2em;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.viewport{
+    margin: 4em;
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+
+    font-size: 40px;
+    border-bottom: 2px solid rgb(222, 226, 230);
+    margin-bottom: 1.5em;
+}
+
+form{
+    background: #fff;
+    opacity: 0.8;
+    display: block;
+    border: 2px;
+    border-radius: 0.3em;
+    padding: 2em;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+}
+
+label{
+    display: block;
+    font-weight: bold;
+    line-height: 1;
+    padding-bottom: 0.2em;
+}
+
+input[type="text"],
+input[type="password"]{
+    display: block;
+    padding: 0.5em 1em;
+    border: 2px solid #ccc;
+    border-radius: 0.3em;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus{
+    border-color: orange;
+}
+
+
+input[type="submit"]{
+    display: block;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.3em;
+    background: #eee;
+    cursor: pointer;
+    outline: none;
+    opacity: 1;
+}
+
+input[type="submit"]:focus{
+    background: orange;
+
+}
+
+.helper{
+    font: italic;
+    font-size: 11px;
+    opacity: 0.5;
+}

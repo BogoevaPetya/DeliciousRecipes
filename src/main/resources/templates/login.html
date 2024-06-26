@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css"/>
+</head>
+<body>
+<section class="viewport">
+    <h1 class="title">Login</h1>
+    <form action="#">
+        <div class="field">
+            <label for="login-username">Username</label>
+            <input type="text" name="username" id="login-username" required>
+            <span class="helper">Min. 8 characters, Max.20 characters</span>
+        </div>
+
+        <div class="field">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="login-password" required>
+            <span class="helper">Min. 8 characters, Max.20 characters</span>
+        </div>
+
+
+        <input type="submit" value="Login">
+
+    </form>
+</section>
+
+</body>
+</html>

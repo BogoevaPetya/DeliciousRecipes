@@ -1,0 +1,20 @@
+main{
+    text-align: left;
+    background-color: aqua;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.col-auto{
+    padding: 0.2em;
+}
+
+
+.justify-content-center{
+    text-align: left;
+    margin-left: 42em;
+}
+
