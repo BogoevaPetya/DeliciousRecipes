@@ -13,9 +13,8 @@ body, input, button{
 }
 
 body{
-
-    background: #eee;
-    background-image: url(/EXAMM/photos/some-tale-TriXQTJ_4gk-unsplash.jpg);
+    background-image: url(/static/img/background.jpg);
+    background-color: #eee;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
