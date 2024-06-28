@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add recipe</title>
+    <link rel="stylesheet" href="/css/add-recipe.css">
+
+</head>
+<body>
+
+<header class="site-section site-header">
+    <div class="container">
+        <div class="site-title">
+            <a href="#">Home</a>
+            <a href="#">Add Recipe</a>
+        </div>
+        <nav class="site-nav">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="">Recipes</a></li>
+                <li><a href="">Register</a></li>
+                <li><a href="">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="viewport">
+    <h1 class="title">Add new recipe</h1>
+    <form action="action_page.php">
+        <div>
+            <label for="username">Name</label>
+            <input type="text"  name="name" id="name" required>
+            <span class="helper">Min. 8 characters, Max.20 characters</span>
+        </div>
+        <div>
+            <label for="ingredients">Ingredients</label>
+            <textarea type="text"
+                      class="ingredients"
+                      id="ingredients"
+                      name="ingredients" required></textarea>
+            <span class="helper">Min. 8 characters, Max.20 characters</span>
+        </div>
+        <div>
+            <label for="instructions">Instructions</label>
+            <textarea type="text"
+                      class="instructions"
+                      id="instructions"
+                      name="instructions" required></textarea>
+            <span class="helper">Min. 8 characters, Max.20 characters</span>
+        </div>
+        <div>
+            <label for="time-for-cooking">Minutes for cooking</label>
+            <input type="number" name="time-for-cooking" id="time-for-cooking" required>
+            <span class="helper">Min. 8 characters, Max.20 characters</span>
+        </div>
+        <div>
+            <label for="category">Category</label>
+            <select class="browser-default custom-select" id="category" name="category">
+                <option value="">Select category</option>
+                <option value="SALAD">Salad</option>
+                <option value="SOUP">Soup</option>
+                <option value="MAIN_DISH">Main dish</option>
+                <option value="DESSERT">Dessert</option>
+            </select>
+            <span class="helper">You must select a category!</span>
+        </div>
+        <hr>
+
+        <div>
+            <form>
+                <button type="submit">Add recipe</button>
+            </form>
+        </div>
+
+    </form>
+</section>
+
+<footer class="footer bg-transparent py-2">
+    <div class="container-fluid text-center">
+        <div class="footer-background footer-text fixed-bottom">
+            &copy; Petya Bogoeva 2024. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>
