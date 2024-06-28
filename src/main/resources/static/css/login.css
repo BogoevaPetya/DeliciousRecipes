@@ -1,40 +1,90 @@
-*{
+@import url('https://fonts.googleapis.com/css?family=PT+Serif');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
 html{
-    font: 14px/1.5 Lato, sans-serif;
-}
-
-body, input, button{
-    font: inherit;
+    font: 14px/1.5 "PT Sans", sans-serif;
 }
 
 body{
-    background-image: url(/static/img/background.jpg);
-    background-color: #eee;
+    background-image: url(/img/background.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    padding: 2em;
-    justify-content: center;
-    align-items: center;
+    background-size: 100%;
+    background-position: top center;
 
 }
 
+header{
+    background-color: green;
+    max-width: 2000px !important;
+    opacity: 0.9;
+}
+
+.site-header .container{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.site-header .site-title{
+    text-align: center;
+    padding-top: 7px;
+}
+
+.site-header nav ul{
+    display: flex;
+    gap: 6.5em;
+}
+
+.site-header nav li{
+    list-style: none outside;
+    padding: 0.5em;
+
+}
+
+.site-header a{
+    color: black;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 6px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+}
+
+.site-section {
+    padding: 1em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.site-section.banner .container{
+    margin: 3em;
+    border: 2px solid black;
+    color: black;
+}
+
+/*Login form */
+
 .viewport{
-    margin: 4em;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    max-width: 300px;
 }
 
 .title{
-
     font-size: 40px;
     border-bottom: 2px solid rgb(222, 226, 230);
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
+    margin-top: 2em;
+    padding-bottom: 0.2em;
 }
 
 form{
@@ -53,12 +103,13 @@ label{
     display: block;
     font-weight: bold;
     line-height: 1;
-    padding-bottom: 0.2em;
+    padding-bottom: 0.6em;
 }
 
 input[type="text"],
 input[type="password"]{
     display: block;
+    width: 100%;
     padding: 0.5em 1em;
     border: 2px solid #ccc;
     border-radius: 0.3em;
@@ -67,24 +118,24 @@ input[type="password"]{
 
 input[type="text"]:focus,
 input[type="password"]:focus{
-    border-color: orange;
+    border-color: green;
 }
 
 
 input[type="submit"]{
     display: block;
-    padding: 0.5em 1em;
+    padding: 0.8em 1em;
     border: none;
     border-radius: 0.3em;
-    background: #eee;
+    background: green;
     cursor: pointer;
     outline: none;
     opacity: 1;
+    font-weight: bold;
 }
 
 input[type="submit"]:focus{
-    background: orange;
-
+    background: #eee;
 }
 
 .helper{
@@ -92,3 +143,18 @@ input[type="submit"]:focus{
     font-size: 11px;
     opacity: 0.5;
 }
+
+/* Footer */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color:green;
+    max-width: 2000px !important;
+    padding: 10px 0;
+    font-weight: bold;
+    opacity: 0.9;
+}
+
