@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Example</title>
     <link rel="stylesheet" href="/css/register.css">
+
 </head>
 <body>
+
+<header class="site-section site-header">
+    <div class="container">
+        <div class="site-title">
+            <a href="#">Home</a>
+        </div>
+        <nav class="site-nav">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="">Recipes</a></li>
+                <li><a href="">Register</a></li>
+                <li><a href="">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
 <section class="viewport">
     <h1 class="title">Register</h1>
     <form action="action_page.php">
@@ -29,8 +47,8 @@
             <label for="psw-repeat">Repeat Password</label>
             <input type="password" name="psw-repeat" id="psw-repeat" required>
             <span class="helper">Min. 8 characters, Max.20 characters</span>
-            <hr>
         </div>
+        <hr>
 
         <div class="terms">By creating an account you agree to our <a href="#">Terms & Privacy</a>.</div>
         <input type="submit" value="Register">
@@ -42,7 +60,12 @@
     </form>
 </section>
 
-
-
+<footer class="footer bg-transparent py-2">
+    <div class="container-fluid text-center">
+        <div class="footer-background footer-text fixed-bottom">
+            &copy; Petya Bogoeva 2024. All rights reserved.
+        </div>
+    </div>
+</footer>
 </body>
 </html>
