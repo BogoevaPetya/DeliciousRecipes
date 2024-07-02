@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Serif');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font: 14px/1.5 "PT Sans", sans-serif;
+}
+
+body{
+    background-image: url(/images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: top center;
+}
+
+header {
+    padding: 0.8em 2em;
+    background-color: green;
+    max-width: 2000px !important;
+    opacity: 0.9;
+}
+
+
+.site-nav ul{
+    display: flex;
+    justify-content: space-between;
+    gap: 5em;
+}
+
+.site-nav li{
+    list-style: none outside;
+    padding: 0.5em;
+
+}
+
+.site-nav a{
+    display: block;
+    padding: 0.5em;
+    color: black;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+}
+
+.site-nav #logout-btn{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: block;
+    padding: 0.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+

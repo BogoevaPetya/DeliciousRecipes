@@ -1,0 +1,75 @@
+/*Login form */
+
+.viewport{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 300px;
+}
+
+
+.viewport .title{
+    font-size: 40px;
+    border-bottom: 2px solid rgb(222, 226, 230);
+    margin-bottom: 1em;
+    margin-top: 2em;
+    padding-bottom: 0.2em;
+}
+
+.login-form{
+    background: #ffffff;
+    opacity: 0.8;
+    border: 2px;
+    border-radius: 0.3em;
+    padding: 2em;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+}
+
+label{
+    display: block;
+    font-weight: bold;
+    line-height: 1;
+    padding-bottom: 0.6em;
+}
+
+input[type="text"],
+input[type="password"]{
+    display: block;
+    width: 100%;
+    padding: 0.5em 1em;
+    border: 2px solid #ccc;
+    border-radius: 0.3em;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus{
+    border-color: green;
+}
+
+
+.login-form input[type="submit"]{
+    display: block;
+    padding: 0.8em 1em;
+    border: none;
+    border-radius: 0.3em;
+    background: green;
+    cursor: pointer;
+    outline: none;
+    opacity: 1;
+    font-weight: bold;
+}
+
+.login-form input[type="submit"]:focus{
+    background: #eee;
+}
+
+.helper{
+    font: italic;
+    font-size: 11px;
+    opacity: 0.5;
+}
+
+
