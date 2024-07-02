@@ -12,7 +12,7 @@ html{
 }
 
 body{
-    background-image: url(/static/images/background.jpg);
+    background-image: url(/images/background.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: top center;
@@ -20,8 +20,13 @@ body{
 }
 
 header{
-    background-color: red;
+    background-color: green;
     max-width: 2000px !important;
+    opacity: 0.9;
+}
+
+.site-section {
+    padding: 0.8em 2em;
 }
 
 .site-header .container{
@@ -33,6 +38,12 @@ header{
 .site-header .site-title{
     text-align: center;
     padding-top: 7px;
+    display: flex;
+    gap: 5em;
+}
+
+.site-header .site-title a{
+    border: none;
 }
 
 .site-header nav ul{
@@ -47,39 +58,25 @@ header{
 }
 
 .site-header a{
-    color: #fff;
+    display: block;
+    padding: 0.5em;
+    color: black;
     text-transform: uppercase;
     text-decoration: none;
-    border: 2px solid white;
-    border: radius 2px;
-
-    padding: 8px;
-
-}
-
-.site-section {
-    padding: 2em;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.site-section.banner .container{
-    margin: 3em;
-    border: 2px solid black;
-    color: black;
+    font-weight: bold;
+    letter-spacing: 0.8px;
 }
 
 
-.site-section h2{
-    padding: 1em;
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     text-align: center;
+    background-color:green;
+    max-width: 2000px !important;
+    padding: 10px 0;
+    font-weight: bold;
+    opacity: 0.9;
 }
 
-.site-section p{
-    padding: 1em;
-    text-align: center;
-}
-
-.column-container{
-    display: flex;
-}

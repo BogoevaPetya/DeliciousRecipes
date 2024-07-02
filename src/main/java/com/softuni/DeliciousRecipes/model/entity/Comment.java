@@ -11,7 +11,7 @@ public class Comment extends BaseEntity{
     @Column(nullable = false)
     private String text;
     @ManyToOne
-    private User author;
+    private UserEntity author;
 
     public Comment() {
     }
@@ -24,11 +24,11 @@ public class Comment extends BaseEntity{
         this.text = text;
     }
 
-    public User getAuthor() {
+    public UserEntity getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserEntity author) {
         this.author = author;
     }
 }

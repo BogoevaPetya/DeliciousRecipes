@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Recipes</title>
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+
+<header>
+    <nav class="site-nav">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a  th:href="@{/add-recipe}">Add Recipe</a></li>
+            <li><a href="#">About</a></li>
+            <li><a th:href="@{/recipes/all}">Recipes</a></li>
+            <li><a sec:authorize="isAnonymous()" th:href="@{users/register}">Register</a></li>
+            <li><a sec:authorize="isAnonymous()" th:href="@{users/login}">Login</a></li>
+            <li>
+                <form th:method="post"
+                      th:action="@{/users/logout}">
+                    <input id="logout-btn" type="submit" value="Logout"/>
+                </form>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+</body>
+</html>

@@ -5,21 +5,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "roles")
 public class Role extends BaseEntity{
+    @NotNull
     @Enumerated(EnumType.STRING)
-    private UserRole name;
+    private UserRole role;
 
     public Role() {
     }
 
-    public UserRole getName() {
-        return name;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setName(UserRole name) {
-        this.name = name;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }

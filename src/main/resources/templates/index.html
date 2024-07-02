@@ -3,51 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipes</title>
+    <title>Delicious Recipes</title>
     <link rel="stylesheet" href="/css/index.css">
+
 </head>
 <body>
 
-<header class="site-section site-header">
-    <div class="container">
-        <div class="site-title">
-            <a href="#">Home</a>
-        </div>
-        <nav class="site-nav">
-            <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="">Recipes</a></li>
-                <li><a href="">Register</a></li>
-                <li><a th:href="@{/users/login}">Login</a></li>
-            </ul>
-        </nav>
-    </div>
+<th:block th:replace="~{fragments/nav.html}"></th:block>
 
-</header>
 
-<section class="site-section banner">
-    <div class="container">
-        <h2>Добре дошли на страницата на Вкусно!</h2>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga culpa, dolores repudiandae esse excepturi ad! Quis at labore provident reprehenderit, maiores optio debitis adipisci libero quo fugit saepe eligendi hic. Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae doloribus quia corporis ducimus sequi! Numquam corporis doloribus, soluta veniam dignissimos minima facilis ducimus quos at porro eaque rerum asperiores voluptatum!</p>
-    </div>
-</section>
 
-<section class="site-section">
-    <div class="container">
-        <h2>Последно добавени</h2>
-        <div class="column-container">
-            <div class="column">
-                <h3>Recipe 1</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae doloribus quia corporis ducimus sequi! Numquam corporis doloribus, soluta veniam dignissimos minima facilis ducimus quos at porro eaque rerum asperiores voluptatum!</p>
-            </div>
-            <div class="column">
-                <h3>Recipe 2</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae doloribus quia corporis ducimus sequi! Numquam corporis doloribus, soluta veniam dignissimos minima facilis ducimus quos at porro eaque rerum asperiores voluptatum!</p>
-            </div>
-
-        </div>
-    </div>
-</section>
+<th:block th:replace="~{fragments/footer.html}"></th:block>
 
 </body>
 </html>

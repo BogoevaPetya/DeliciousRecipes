@@ -2,11 +2,13 @@ package com.softuni.DeliciousRecipes.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
+public class UserEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false, unique = true)
@@ -19,10 +21,15 @@ public class User extends BaseEntity{
     private Set<Recipe> favoriteRecipes;
     @OneToMany(mappedBy = "author")
     private Set<Comment> comments;
-    @ManyToOne
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
 
-    public User() {
+    public UserEntity() {
     }
 
     public String getUsername() {
@@ -73,11 +80,13 @@ public class User extends BaseEntity{
         this.comments = comments;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
+
+

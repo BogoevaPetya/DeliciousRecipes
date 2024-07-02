@@ -3,28 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add recipe</title>
+    <title>Delicious Recipes</title>
     <link rel="stylesheet" href="/css/add-recipe.css">
+    <link rel="stylesheet" href="/css/nav.css">
 
 </head>
 <body>
 
-<header class="site-section site-header">
-    <div class="container">
-        <div class="site-title">
-            <a href="#">Home</a>
-            <a href="#">Add Recipe</a>
-        </div>
-        <nav class="site-nav">
-            <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="">Recipes</a></li>
-                <li><a href="">Register</a></li>
-                <li><a href="">Login</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+<th:block th:replace="~{fragments/nav.html}"></th:block>
 
 <section class="viewport">
     <h1 class="title">Add new recipe</h1>
