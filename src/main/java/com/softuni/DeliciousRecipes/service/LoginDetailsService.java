@@ -2,7 +2,7 @@ package com.softuni.DeliciousRecipes.service;
 
 import com.softuni.DeliciousRecipes.model.entity.Role;
 import com.softuni.DeliciousRecipes.model.entity.UserEntity;
-import com.softuni.DeliciousRecipes.repo.UserRepository;
+import com.softuni.DeliciousRecipes.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

@@ -1,6 +1,6 @@
 package com.softuni.DeliciousRecipes.config;
 
-import com.softuni.DeliciousRecipes.repo.UserRepository;
+import com.softuni.DeliciousRecipes.repository.UserRepository;
 import com.softuni.DeliciousRecipes.service.LoginDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +34,7 @@ public class SecurityConfig {
                             .passwordParameter("password")
                             //aко не задам true ще ме закара на някоя страница, която съм искала да видя
                             //когато не съм била логната и не съм имала право
-                            .defaultSuccessUrl("/", true)
+                            .defaultSuccessUrl("/")
                             .failureForwardUrl("/users/login-error");
                 })
                 .logout(logout -> {

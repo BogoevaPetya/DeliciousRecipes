@@ -13,10 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
-public class UserController {
+public class RegistrationController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public RegistrationController(UserService userService) {
         this.userService = userService;
     }
 
@@ -24,19 +24,6 @@ public class UserController {
     public UserRegisterDTO userRegisterDTO(){
         return new UserRegisterDTO();
     }
-    
-    @GetMapping("/login")
-    public String login(){
-        return "login1";
-    }
-
-    @PostMapping("/login-error")
-    public String loginError(RedirectAttributes redirectAttributes){
-        boolean wrongCredentials = true;
-        redirectAttributes.addFlashAttribute("wrongCredentials", wrongCredentials);
-        return "redirect:/users/login";
-    }
-
 
     @GetMapping("/register")
     public String registerView(){

@@ -1,4 +1,4 @@
-package com.softuni.DeliciousRecipes.repo;
+package com.softuni.DeliciousRecipes.repository;
 
 import com.softuni.DeliciousRecipes.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

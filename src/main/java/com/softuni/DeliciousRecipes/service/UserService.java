@@ -2,7 +2,7 @@ package com.softuni.DeliciousRecipes.service;
 
 import com.softuni.DeliciousRecipes.model.dto.UserRegisterDTO;
 import com.softuni.DeliciousRecipes.model.entity.UserEntity;
-import com.softuni.DeliciousRecipes.repo.UserRepository;
+import com.softuni.DeliciousRecipes.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
