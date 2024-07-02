@@ -69,10 +69,18 @@
     background: #eee;
 }
 
-.recipe-form .helper{
+.helper{
     font: italic;
     font-size: 11px;
     opacity: 0.5;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+
+.red-background{
+    background-color: red;
 }
 
 

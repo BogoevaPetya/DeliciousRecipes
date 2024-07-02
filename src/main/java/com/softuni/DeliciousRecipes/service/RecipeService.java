@@ -39,7 +39,6 @@ public class RecipeService {
         recipe.setAddedBy(user);
 
         Optional<Category> category = categoryRepository.findByName(recipeAddDTO.getCategory());
-
         recipe.setCategory(category.get());
         recipeRepository.save(recipe);
         return true;
