@@ -1,5 +1,5 @@
 
-/*Login form */
+/*Recipe form */
 
 .viewport{
     display: flex;
@@ -16,7 +16,7 @@
     padding-bottom: 0.2em;
 }
 
-form{
+.recipe-form{
     background: #fff;
     opacity: 0.8;
     display: block;
@@ -28,14 +28,16 @@ form{
     flex-direction: column;
 }
 
-label{
+.recipe-form label{
     display: block;
     font-weight: bold;
     line-height: 1;
     padding-bottom: 0.6em;
 }
 
-form input, form textarea, form select{
+.recipe-form input,
+.recipe-form textarea,
+.recipe-form select{
     display: block;
     width: 100%;
     padding: 0.5em 1em;
@@ -43,14 +45,14 @@ form input, form textarea, form select{
     border-radius: 0.3em;
 }
 
-form input:focus,
-form textarea:focus,
-form select:focus{
+.recipe-form input:focus,
+.recipe-form textarea:focus,
+.recipe-form select:focus{
     border-color: green;
 }
 
 
-form button[type="submit"]{
+.recipe-form button[type="submit"]{
     display: block;
     width: 100%;
     padding: 0.8em 1em;
@@ -63,28 +65,14 @@ form button[type="submit"]{
     font-weight: bold;
 }
 
-form button[type="submit"]:focus{
+.recipe-form button[type="submit"]:focus{
     background: #eee;
 }
 
-form .helper{
+.recipe-form .helper{
     font: italic;
     font-size: 11px;
     opacity: 0.5;
 }
 
-
-/* Footer */
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    background-color:green;
-    max-width: 2000px !important;
-    padding: 10px 0;
-    font-weight: bold;
-    opacity: 0.9;
-}
 

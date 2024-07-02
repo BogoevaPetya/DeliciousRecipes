@@ -14,9 +14,11 @@
 
 <section class="viewport">
     <h1 class="title">Add new recipe</h1>
-    <form action="action_page.php">
+    <form class="recipe-form"
+          th:method="POST"
+          th:action="@{/recipes/add}">
         <div>
-            <label for="username">Name</label>
+            <label for="name">Name</label>
             <input type="text"  name="name" id="name" required>
             <span class="helper">Min. 8 characters, Max.20 characters</span>
         </div>
@@ -63,12 +65,8 @@
     </form>
 </section>
 
-<footer class="footer bg-transparent py-2">
-    <div class="container-fluid text-center">
-        <div class="footer-background footer-text fixed-bottom">
-            &copy; Petya Bogoeva 2024. All rights reserved.
-        </div>
-    </div>
-</footer>
+<th:block th:replace="~{fragments/footer.html}"></th:block>
+
+
 </body>
 </html>

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RecipeController {
 
-    @GetMapping("/add-recipe")
+    @GetMapping("/recipes/add")
     public String addRecipeView(){
         return "add-recipe";
     }

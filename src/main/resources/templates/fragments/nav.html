@@ -12,8 +12,8 @@
 <header>
     <nav class="site-nav">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a  th:href="@{/add-recipe}">Add Recipe</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a  th:href="@{/recipes/add}">Add Recipe</a></li>
             <li><a href="#">About</a></li>
             <li><a th:href="@{/recipes/all}">Recipes</a></li>
             <li><a sec:authorize="isAnonymous()" th:href="@{users/register}">Register</a></li>
