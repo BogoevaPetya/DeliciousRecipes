@@ -33,9 +33,10 @@ public class RecipeController {
     }
 
     @PostMapping("/add")
-    public String addRecipe(@Valid RecipeAddDTO recipeAddDTO, BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes,
+    public String addRecipe(@Valid RecipeAddDTO recipeAddDTO,
                             @RequestParam("image")MultipartFile file,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes,
                             @AuthenticationPrincipal UserDetails userDetails){
 
         if (bindingResult.hasErrors()){

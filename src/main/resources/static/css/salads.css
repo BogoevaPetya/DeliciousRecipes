@@ -1,0 +1,35 @@
+body{
+    background-image: url(/images/green-salad.jpg) !important;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: top center;
+}
+
+.salad{
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 5em;
+    gap: 5em;
+}
+
+.salad table tr{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(245, 222, 179);
+}
+
+.salad table img{
+    width: 120px;
+}
+
+.salad table td{
+    text-align: center;
+    background-color: wheat;
+}
+
+.salad table td a{
+    text-decoration: none;
+    color: green;
+    font-weight: bold;
+    font-size: medium;
+}
