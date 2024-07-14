@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Delicious Recipes</title>
+
+</head>
+
+<body>
+
+<th:block th:replace="~{fragments/nav.html}"></th:block>
+
+
+<div class="container-fluid">
+    <h5 class="text-center text-white mt-5">Opps! Object with id <th:block th:text="${objectId}">1</th:block> was not found!</h5>
+</div>
+
+<div class="text-center text-white mt-5">We are sorry! Please navigate to <a th:href="@{/}">home page</a>...</div>
+
+<div>
+    <footer> </footer>
+</div>
+
+</body>
+</html>
