@@ -2,6 +2,7 @@ package com.softuni.DeliciousRecipes.model.dto;
 
 import com.softuni.DeliciousRecipes.model.entity.Category;
 import com.softuni.DeliciousRecipes.model.enums.CategoryName;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
@@ -12,7 +13,7 @@ public class RecipeAddDTO {
     private String name;
     @NotNull
     private CategoryName category;
-    @Size(min = 10, max = 60)
+    @Size(min = 10)
     @NotNull
     private String ingredients;
     @Size(min = 20)
@@ -20,6 +21,7 @@ public class RecipeAddDTO {
     private String instructions;
     @PositiveOrZero
     private Integer timeForCooking;
+    private String image;
 
     public String getName() {
         return name;
@@ -59,5 +61,13 @@ public class RecipeAddDTO {
 
     public void setTimeForCooking(Integer timeForCooking) {
         this.timeForCooking = timeForCooking;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

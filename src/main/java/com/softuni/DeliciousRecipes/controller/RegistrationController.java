@@ -27,6 +27,7 @@ public class RegistrationController {
 
     @GetMapping("/register")
     public String registerView(){
+//        return new NullPointerException().getMessage();
         return "register";
     }
 

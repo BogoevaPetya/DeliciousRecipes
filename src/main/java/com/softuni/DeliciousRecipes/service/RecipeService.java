@@ -11,7 +11,14 @@ import com.softuni.DeliciousRecipes.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -32,7 +39,19 @@ public class RecipeService {
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
-    public boolean add(RecipeAddDTO recipeAddDTO, String username) {
+    public boolean add(RecipeAddDTO recipeAddDTO, String username, MultipartFile file) {
+        Path destinationFile = Paths
+                .get("src", "main","resources", "uploads", "file.gpx")
+                .normalize()
+                .toAbsolutePath();
+
+        try (InputStream inputStream = file.getInputStream()) {
+            Files.copy(inputStream, destinationFile,
+                    StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         UserEntity user = findByUsername(username);
 
         Recipe recipe = modelMapper.map(recipeAddDTO, Recipe.class);

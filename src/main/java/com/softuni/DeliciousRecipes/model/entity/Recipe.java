@@ -13,12 +13,14 @@ public class Recipe extends BaseEntity{
     private Category category;
     @Column(nullable = false)
     private String ingredients;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String instructions;
     private Integer timeForCooking;
     @ManyToOne(optional = false)
     private UserEntity addedBy;
     private int likes;
+    @Column(columnDefinition = "LONGTEXT")
+    private String image;
     @OneToMany
     private List<Comment> comments;
 
@@ -87,5 +89,13 @@ public class Recipe extends BaseEntity{
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

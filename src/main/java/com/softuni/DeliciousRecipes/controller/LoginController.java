@@ -15,12 +15,4 @@ public class LoginController {
         return "login1";
     }
 
-
-//    @PostMapping("/login-error")
-//    public String loginError(RedirectAttributes redirectAttributes){
-//        boolean wrongCredentials = true;
-//        redirectAttributes.addFlashAttribute("wrongCredentials", wrongCredentials);
-//        return "redirect:/users/login";
-//    }
-
 }

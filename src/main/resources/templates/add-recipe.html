@@ -18,7 +18,8 @@
     <form class="recipe-form"
           th:object="${recipeAddDTO}"
           th:method="POST"
-          th:action="@{/recipes/add}">
+          th:action="@{/recipes/add}"
+          enctype="multipart/form-data">
         <div>
             <label for="name">Name</label>
             <input type="text"
@@ -56,8 +57,8 @@
                    th:errorclass="red-background"
                    id="time-for-cooking">
             <span th:if="${#fields.hasErrors('timeForCooking')}" class="helper">The time must be positive number!</span>
-
         </div>
+
         <div>
             <label for="category">Category</label>
             <select class="browser-default custom-select"
@@ -72,6 +73,15 @@
                 <option value="DESSERT">Dessert</option>
             </select>
             <span th:if="${#fields.hasErrors('category')}" class="helper">You must select a category!</span>
+        </div>
+
+        <div>
+            <label for="image">Image</label>
+            <input type="file"
+                   name="image"
+                   th:field="*{image}"
+                   th:errorclass="red-background"
+                   id="image">
         </div>
 
         <div>

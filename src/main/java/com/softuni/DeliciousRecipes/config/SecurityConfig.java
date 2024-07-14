@@ -22,7 +22,7 @@ public class SecurityConfig {
                             authorizeRequests
                                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                     .requestMatchers("/images/*").permitAll()
-                                    .requestMatchers("/", "/users/login", "/users/register").permitAll()
+                                    .requestMatchers("/", "/users/login", "/users/register", "error").permitAll()
                                     .anyRequest().authenticated();
                         }
                 )

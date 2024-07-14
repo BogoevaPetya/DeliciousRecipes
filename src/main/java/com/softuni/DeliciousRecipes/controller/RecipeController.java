@@ -7,10 +7,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
@@ -37,6 +35,7 @@ public class RecipeController {
     @PostMapping("/add")
     public String addRecipe(@Valid RecipeAddDTO recipeAddDTO, BindingResult bindingResult,
                             RedirectAttributes redirectAttributes,
+                            @RequestParam("image")MultipartFile file,
                             @AuthenticationPrincipal UserDetails userDetails){
 
         if (bindingResult.hasErrors()){
@@ -45,7 +44,7 @@ public class RecipeController {
             return "redirect:/recipes/add";
         }
 
-        boolean success = recipeService.add(recipeAddDTO, userDetails.getUsername());
+        boolean success = recipeService.add(recipeAddDTO, userDetails.getUsername(), file);
 
         if (!success){
             redirectAttributes.addAttribute("recipeAddDTO", recipeAddDTO);
@@ -53,5 +52,10 @@ public class RecipeController {
         }
 
         return "redirect:/home";
+    }
+
+    @GetMapping("/salads")
+    public String saladsView(){
+        return "salads";
     }
 }
