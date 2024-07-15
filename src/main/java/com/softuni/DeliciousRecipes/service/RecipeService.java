@@ -9,10 +9,14 @@ import com.softuni.DeliciousRecipes.repository.CategoryRepository;
 import com.softuni.DeliciousRecipes.repository.RecipeRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -28,18 +32,27 @@ public class RecipeService {
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
+    private final RestClient restClient;
 
-    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserRepository userRepository, CategoryRepository categoryRepository) {
+    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserRepository userRepository, CategoryRepository categoryRepository, @Qualifier("recipesRestClient") RestClient restClient) {
         this.recipeRepository = recipeRepository;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
+        this.restClient = restClient;
     }
 
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
     public boolean add(RecipeAddDTO recipeAddDTO, String username, MultipartFile file) {
+//        restClient
+//                .post()
+//                .uri("http://localhost8081/recipes")
+//                .body(recipeAddDTO)
+//                .retrieve();
+
+
         Path destinationFile = Paths
                 .get("src", "main","resources", "uploads", "file.gpx")
                 .normalize()
@@ -62,5 +75,6 @@ public class RecipeService {
         recipeRepository.save(recipe);
         return true;
     }
+
 
 }
