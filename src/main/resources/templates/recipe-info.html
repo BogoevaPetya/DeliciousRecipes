@@ -5,21 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delicious Recipes</title>
-    <link rel="stylesheet" href="/css/salads.css">
+    <link rel="stylesheet" href="/css/recipe-info.css">
 
 </head>
 <body>
 
 <th:block th:replace="~{fragments/nav.html}"></th:block>
 
-<div class="container">
-    <table>
-        <tr th:each="salad : ${allSalads}">
-            <td><img th:src="${salad.image}" width="260px" height="200px">
-            <td><p><a class="btn-info btn" th:href="@{/{id}(id=${salad.id})}">View</td>
 
-        </tr>
-    </table>
-</div>
 
 </body>

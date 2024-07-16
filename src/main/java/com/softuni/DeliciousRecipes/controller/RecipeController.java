@@ -1,6 +1,8 @@
 package com.softuni.DeliciousRecipes.controller;
 
 import com.softuni.DeliciousRecipes.model.dto.RecipeAddDTO;
+import com.softuni.DeliciousRecipes.model.dto.RecipeFullInfoDTO;
+import com.softuni.DeliciousRecipes.model.dto.RecipeInfoDTO;
 import com.softuni.DeliciousRecipes.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,7 +38,6 @@ public class RecipeController {
 
     @PostMapping("/add")
     public String addRecipe(@Valid RecipeAddDTO recipeAddDTO,
-                            @RequestParam("image")MultipartFile file,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes,
                             @AuthenticationPrincipal UserDetails userDetails){
@@ -47,7 +48,7 @@ public class RecipeController {
             return "redirect:/recipes/add";
         }
 
-        boolean success = recipeService.add(recipeAddDTO, userDetails.getUsername(), file);
+        boolean success = recipeService.add(recipeAddDTO, userDetails.getUsername());
 
         if (!success){
             redirectAttributes.addAttribute("recipeAddDTO", recipeAddDTO);
@@ -57,10 +58,21 @@ public class RecipeController {
         return "redirect:/home";
     }
 
+    @GetMapping("/all")
+    public String viewAll(){
+        return "all-recipes";
+    }
+
     @GetMapping("/salads")
-    public String saladsView(Model model){
-        List<RecipeAddDTO> allRecipes = recipeService.allRecipes();
-        model.addAttribute("allRecipes", allRecipes);
+    public String viewSalads(Model model){
+        List<RecipeInfoDTO> allSalads = recipeService.getAllSalads();
+        model.addAttribute("allSalads", allSalads);
         return "salads";
+    }
+
+    @GetMapping("/salads/{id}")
+    public String viewSaladById(@PathVariable("id") Long id){
+        RecipeFullInfoDTO recipe = recipeService.getRecipeById(id);
+        return "recipe-info";
     }
 }

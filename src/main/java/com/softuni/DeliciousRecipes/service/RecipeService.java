@@ -1,6 +1,8 @@
 package com.softuni.DeliciousRecipes.service;
 
 import com.softuni.DeliciousRecipes.model.dto.RecipeAddDTO;
+import com.softuni.DeliciousRecipes.model.dto.RecipeFullInfoDTO;
+import com.softuni.DeliciousRecipes.model.dto.RecipeInfoDTO;
 import com.softuni.DeliciousRecipes.model.entity.Category;
 import com.softuni.DeliciousRecipes.model.entity.Recipe;
 import com.softuni.DeliciousRecipes.model.entity.UserEntity;
@@ -47,7 +49,7 @@ public class RecipeService {
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
-    public boolean add(RecipeAddDTO recipeAddDTO, String username, MultipartFile file) {
+    public boolean add(RecipeAddDTO recipeAddDTO, String username) {
 //        restClient
 //                .post()
 //                .uri("http://localhost8081/recipes")
@@ -65,9 +67,23 @@ public class RecipeService {
         return true;
     }
 
-    public List<RecipeAddDTO> allRecipes(){
-        return this.recipeRepository.findAll().stream().map(r -> modelMapper.map(r, RecipeAddDTO.class)).collect(Collectors.toList());
+    public List<RecipeInfoDTO> getAllSalads(){
+        List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.SALAD);
+
+
+        return recipes.stream()
+                .map(r -> modelMapper.map(r, RecipeInfoDTO.class))
+                .collect(Collectors.toList());
     }
 
 
+    public RecipeFullInfoDTO getRecipeById(Long id) {
+        Optional<Recipe> optional = recipeRepository.findById(id);
+
+        if (optional.isEmpty()){
+            //TODO
+        }
+
+        return modelMapper.map(optional.get(), RecipeFullInfoDTO.class);
+    }
 }

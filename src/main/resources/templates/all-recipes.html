@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Recipes</title>
+    <link rel="stylesheet" href="/css/all-recipes.css">
+    <link rel="stylesheet" href="/css/nav.css">
+
+</head>
+<body>
+
+<th:block th:replace="~{fragments/nav.html}"></th:block>
+
+<div class="categories">
+    <section><a href="">SALADS (count)</a></section>
+    <section><a href="">SOUPS (count)</a></section>
+    <section><a href="">MAIN DISHES (count)</a></section>
+    <section><a href="">DESSERTS (count)</a></section>
+</div>
+
+<th:block th:replace="~{fragments/footer.html}"></th:block>
+
+
+</body>
+</html>
