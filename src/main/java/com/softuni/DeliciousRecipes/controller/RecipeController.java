@@ -2,7 +2,7 @@ package com.softuni.DeliciousRecipes.controller;
 
 import com.softuni.DeliciousRecipes.model.dto.RecipeAddDTO;
 import com.softuni.DeliciousRecipes.model.dto.RecipeFullInfoDTO;
-import com.softuni.DeliciousRecipes.model.dto.RecipeInfoDTO;
+import com.softuni.DeliciousRecipes.model.dto.RecipeShortInfoDTO;
 import com.softuni.DeliciousRecipes.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,10 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -65,7 +63,7 @@ public class RecipeController {
 
     @GetMapping("/salads")
     public String viewSalads(Model model){
-        List<RecipeInfoDTO> allSalads = recipeService.getAllSalads();
+        List<RecipeShortInfoDTO> allSalads = recipeService.getAllSalads();
         model.addAttribute("allSalads", allSalads);
         return "salads";
     }

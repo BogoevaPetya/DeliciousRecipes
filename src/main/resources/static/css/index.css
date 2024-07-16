@@ -1,82 +1,30 @@
-@import url('https://fonts.googleapis.com/css?family=PT+Serif');
-@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-html{
-    font: 14px/1.5 "PT Sans", sans-serif;
-}
-
-body{
-    background-image: url(/images/background.jpg);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: top center;
-
-}
-
-header{
-    background-color: green;
-    max-width: 2000px !important;
-    opacity: 0.9;
-}
-
-.site-section {
-    padding: 0.8em 2em;
-}
-
-.site-header .container{
+.container{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 2em;
     text-align: center;
+    margin: 0 auto;
+    margin-top: 5em;
+    font-size: large;
+    border: 2px solid #9f7951;
+    border-radius: 1.7em;
+    max-width: 1000px;
+    background-color: #fff;
+    opacity: 0.8;
+    padding: 30px 0;
 }
 
-.site-header .site-title{
-    text-align: center;
-    padding-top: 7px;
-    display: flex;
-    gap: 5em;
-}
-
-.site-header .site-title a{
-    border: none;
-}
-
-.site-header nav ul{
-    display: flex;
-    gap: 6.5em;
-}
-
-.site-header nav li{
-    list-style: none outside;
-    padding: 0.5em;
-
-}
-
-.site-header a{
-    display: block;
-    padding: 0.5em;
-    color: black;
-    text-transform: uppercase;
-    text-decoration: none;
+.container h1{
+    border-bottom: 2px solid green;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 0.2em;
     font-weight: bold;
-    letter-spacing: 0.8px;
 }
 
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    background-color:green;
-    max-width: 2000px !important;
-    padding: 10px 0;
+.container a{
+    color: green;
     font-weight: bold;
-    opacity: 0.9;
 }
+
 

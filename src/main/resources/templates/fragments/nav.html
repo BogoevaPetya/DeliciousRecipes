@@ -16,8 +16,8 @@
             <li><a  th:href="@{/recipes/add}">Add Recipe</a></li>
             <li><a href="#">About</a></li>
             <li><a th:href="@{/recipes/all}">Recipes</a></li>
-            <li><a sec:authorize="isAnonymous()" th:href="@{users/register}">Register</a></li>
-            <li><a sec:authorize="isAnonymous()" th:href="@{users/login}">Login</a></li>
+            <li><a sec:authorize="isAnonymous()" th:href="@{/users/register}">Register</a></li>
+            <li><a sec:authorize="isAnonymous()" th:href="@{/users/login}">Login</a></li>
             <li>
                 <form th:method="post"
                       th:action="@{/users/logout}">

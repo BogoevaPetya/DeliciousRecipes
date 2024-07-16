@@ -11,15 +11,16 @@
 <body>
 
 <th:block th:replace="~{fragments/nav.html}"></th:block>
-
+<p class="title">SALADS</p>
 
 <div class="container">
+
 
     <table>
         <tr th:each="salad : ${allSalads}">
             <td><img th:src="${salad.image}" width="260px" height="200px">
-            <td><p th:text="${salad.name}"></p></td>
-            <td><a th:href="@{/{id}(id=${salad.id})}">View</a></td>
+            <td><a th:text="${salad.name}" th:href="@{/{id}(id=${salad.id})}">View</a></td>
+            <td><b>Time for cooking:</b> <span th:text="${salad.timeForCooking} + ' '"></span>minutes</td>
 
         </tr>
     </table>

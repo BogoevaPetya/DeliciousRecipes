@@ -2,7 +2,7 @@ package com.softuni.DeliciousRecipes.service;
 
 import com.softuni.DeliciousRecipes.model.dto.RecipeAddDTO;
 import com.softuni.DeliciousRecipes.model.dto.RecipeFullInfoDTO;
-import com.softuni.DeliciousRecipes.model.dto.RecipeInfoDTO;
+import com.softuni.DeliciousRecipes.model.dto.RecipeShortInfoDTO;
 import com.softuni.DeliciousRecipes.model.entity.Category;
 import com.softuni.DeliciousRecipes.model.entity.Recipe;
 import com.softuni.DeliciousRecipes.model.entity.UserEntity;
@@ -12,20 +12,9 @@ import com.softuni.DeliciousRecipes.repository.RecipeRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,12 +56,12 @@ public class RecipeService {
         return true;
     }
 
-    public List<RecipeInfoDTO> getAllSalads(){
+    public List<RecipeShortInfoDTO> getAllSalads(){
         List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.SALAD);
 
 
         return recipes.stream()
-                .map(r -> modelMapper.map(r, RecipeInfoDTO.class))
+                .map(r -> modelMapper.map(r, RecipeShortInfoDTO.class))
                 .collect(Collectors.toList());
     }
 

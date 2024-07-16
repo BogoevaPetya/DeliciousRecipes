@@ -16,7 +16,7 @@ public class Recipe extends BaseEntity{
     private String ingredients;
     @Column(nullable = false, columnDefinition = "TEXT")
     private String instructions;
-    private Integer timeForCooking;
+    private int timeForCooking;
     @ManyToOne(optional = false)
     private UserEntity addedBy;
     private int likes;
@@ -60,11 +60,11 @@ public class Recipe extends BaseEntity{
         this.instructions = instructions;
     }
 
-    public Integer getTimeForCooking() {
+    public int getTimeForCooking() {
         return timeForCooking;
     }
 
-    public void setTimeForCooking(Integer timeForCooking) {
+    public void setTimeForCooking(int timeForCooking) {
         this.timeForCooking = timeForCooking;
     }
 

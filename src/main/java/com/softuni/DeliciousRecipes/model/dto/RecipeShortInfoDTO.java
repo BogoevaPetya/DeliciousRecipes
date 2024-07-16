@@ -1,9 +1,10 @@
 package com.softuni.DeliciousRecipes.model.dto;
 
-public class RecipeInfoDTO {
+public class RecipeShortInfoDTO {
     private Long id;
     private String name;
     private String image;
+    private int timeForCooking;
 
     public String getName() {
         return name;
@@ -27,5 +28,13 @@ public class RecipeInfoDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getTimeForCooking() {
+        return timeForCooking;
+    }
+
+    public void setTimeForCooking(int timeForCooking) {
+        this.timeForCooking = timeForCooking;
     }
 }
