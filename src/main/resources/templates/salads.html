@@ -12,14 +12,19 @@
 
 <th:block th:replace="~{fragments/nav.html}"></th:block>
 
+
 <div class="container">
+
     <table>
         <tr th:each="salad : ${allSalads}">
             <td><img th:src="${salad.image}" width="260px" height="200px">
-            <td><p><a class="btn-info btn" th:href="@{/{id}(id=${salad.id})}">View</td>
+            <td><p th:text="${salad.name}"></p></td>
+            <td><a th:href="@{/{id}(id=${salad.id})}">View</a></td>
 
         </tr>
     </table>
 </div>
+
+<th:block th:replace="~{fragments/footer.html}"></th:block>
 
 </body>
