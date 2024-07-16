@@ -6,12 +6,14 @@ import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/recipes")
@@ -56,7 +58,9 @@ public class RecipeController {
     }
 
     @GetMapping("/salads")
-    public String saladsView(){
+    public String saladsView(Model model){
+        List<RecipeAddDTO> allRecipes = recipeService.allRecipes();
+        model.addAttribute("allRecipes", allRecipes);
         return "salads";
     }
 }

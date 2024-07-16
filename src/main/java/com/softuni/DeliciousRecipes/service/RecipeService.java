@@ -24,7 +24,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {
@@ -52,19 +54,6 @@ public class RecipeService {
 //                .body(recipeAddDTO)
 //                .retrieve();
 
-
-        Path destinationFile = Paths
-                .get("src", "main","resources", "uploads", "file.gpx")
-                .normalize()
-                .toAbsolutePath();
-
-        try (InputStream inputStream = file.getInputStream()) {
-            Files.copy(inputStream, destinationFile,
-                    StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         UserEntity user = findByUsername(username);
 
         Recipe recipe = modelMapper.map(recipeAddDTO, Recipe.class);
@@ -74,6 +63,10 @@ public class RecipeService {
         recipe.setCategory(category.get());
         recipeRepository.save(recipe);
         return true;
+    }
+
+    public List<RecipeAddDTO> allRecipes(){
+        return this.recipeRepository.findAll().stream().map(r -> modelMapper.map(r, RecipeAddDTO.class)).collect(Collectors.toList());
     }
 
 

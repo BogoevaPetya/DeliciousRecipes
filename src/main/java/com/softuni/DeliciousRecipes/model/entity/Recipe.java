@@ -1,6 +1,7 @@
 package com.softuni.DeliciousRecipes.model.entity;
 
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
