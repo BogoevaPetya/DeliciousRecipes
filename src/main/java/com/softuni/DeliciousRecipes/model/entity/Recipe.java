@@ -16,13 +16,15 @@ public class Recipe extends BaseEntity{
     private String ingredients;
     @Column(nullable = false, columnDefinition = "TEXT")
     private String instructions;
+    @Column(name = "time_for_cooking")
     private int timeForCooking;
+
     @ManyToOne(optional = false)
     private UserEntity addedBy;
     private int likes;
     @Column(columnDefinition = "LONGTEXT")
     private String image;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     public Recipe() {

@@ -21,7 +21,7 @@ public class RecipeAddDTO {
     private String instructions;
     @PositiveOrZero
     private Integer timeForCooking;
-    private String image;
+    private String imageUrl;
 
     public String getName() {
         return name;
@@ -63,11 +63,11 @@ public class RecipeAddDTO {
         this.timeForCooking = timeForCooking;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

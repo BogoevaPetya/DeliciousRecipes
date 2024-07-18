@@ -1,0 +1,51 @@
+@import url('https://use.fontawesome.com/releases/v5.15.4/css/all.css');
+
+.container{
+    max-width: 1100px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 400px;
+    margin: 0 auto;
+    margin-bottom: 6em;
+}
+
+section{
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 3em;
+}
+
+.photo{
+    margin: 0 auto;
+}
+
+.features{
+    display: flex;
+    margin: 0 auto;
+    gap: 2em;
+}
+
+img{
+    border-radius: 0.6em;
+    margin-top: 1em;
+}
+
+.main{
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 3em;
+
+}
+
+.main p{
+    background-color: green;
+    padding: 10px;
+    margin: 15px 0;
+    font-weight: bold;
+}

@@ -29,6 +29,11 @@ public class RecipeController {
         return new RecipeAddDTO();
     }
 
+    @ModelAttribute
+    public RecipeFullInfoDTO recipeFullInfoDTO(){
+        return new RecipeFullInfoDTO();
+    }
+
     @GetMapping("/add")
     public String addRecipeView(){
         return "add-recipe";
@@ -53,7 +58,7 @@ public class RecipeController {
             return "redirect:/recipes/add";
         }
 
-        return "redirect:/home";
+        return "redirect:/recipes/all";
     }
 
     @GetMapping("/all")
@@ -68,9 +73,12 @@ public class RecipeController {
         return "salads";
     }
 
-    @GetMapping("/salads/{id}")
-    public String viewSaladById(@PathVariable("id") Long id){
+    @GetMapping("/{id}")
+    public String viewSaladById(@PathVariable("id") Long id, Model model){
         RecipeFullInfoDTO recipe = recipeService.getRecipeById(id);
+        model.addAttribute("recipeInfo", recipe);
         return "recipe-info";
     }
+
+
 }

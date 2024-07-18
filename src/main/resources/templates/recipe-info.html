@@ -12,6 +12,40 @@
 
 <th:block th:replace="~{fragments/nav.html}"></th:block>
 
+    <section th:object="${recipeInfo}">
+        <div class="photo">
+            <h1 th:text="${recipeInfo.name}">Title</h1>
+            <img th:src="${recipeInfo.image}" alt="dessert" width="260px" height="200px">
+        </div>
+        <div class="features">
+            <div class="likes">
+                <i class="fas fa-thumbs-up"></i>
+                <a href="">Like</a>
+            </div>
+            <div class="favorites">
+                <i class="fas fa-heart"></i>
+                <a href="">Add to favorites</a>
+            </div>
+            <div class="time">
+                <i class="fas fa-clock"></i>
+                <span>Time for cooking: <span th:text="${recipeInfo.timeForCooking} + ' '"></span>minutes</span>
+            </div>
+        </div>
 
+        <div class="container">
+            <div class="main">
+                <div>
+                    <p>НЕОБХОДИМИ ПРОДУКТИ:</p>
+                    <div th:text="${recipeInfo.ingredients}"></div>
+                </div>
+                <div>
+                    <p>НАЧИН НА ПРИГОТВЯНЕ:</p>
+                    <div th:text="${recipeInfo.instructions}">Example</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<th:block th:replace="~{fragments/footer.html}"></th:block>
 
 </body>

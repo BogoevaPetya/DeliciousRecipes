@@ -76,6 +76,16 @@
         </div>
 
         <div>
+            <label for="image" class="h4 mb-2">Image URL</label>
+            <textarea type="text"
+                      class="form-control"
+                      th:field="*{imageUrl}"
+                      id="image"
+                      name="image"></textarea>
+<!--            <small th:errors="*{imageUrl}" class="danger">Image URL error message</small>-->
+        </div>
+
+        <div>
             <form>
                 <button type="submit">Add recipe</button>
             </form>
