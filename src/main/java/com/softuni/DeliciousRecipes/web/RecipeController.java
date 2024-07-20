@@ -1,4 +1,4 @@
-package com.softuni.DeliciousRecipes.controller;
+package com.softuni.DeliciousRecipes.web;
 
 import com.softuni.DeliciousRecipes.model.dto.RecipeAddDTO;
 import com.softuni.DeliciousRecipes.model.dto.RecipeFullInfoDTO;
