@@ -1,4 +1,4 @@
--- INSERT INTO roles VALUES (1, 'USER'), (2, 'ADMINISTRATOR');
+ INSERT INTO roles VALUES (1, 'USER'), (2, 'ADMINISTRATOR');
 --
 -- INSERT INTO users VALUES(1, 'petincka@abv.bg', '123', 'petincka');
 

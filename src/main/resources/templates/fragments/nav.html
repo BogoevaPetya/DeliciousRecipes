@@ -12,13 +12,15 @@
 <header>
     <nav class="site-nav">
         <ul>
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a  th:href="@{/recipes/add}">Add Recipe</a></li>
+            <li><a sec:authorize="isAnonymous()" th:href="@{/}">Home</a></li>
+            <li><a sec:authorize="${isAuthenticated}" th:href="@{/home}">Home</a></li>
+
+            <li><a sec:authorize="${isAuthenticated}" th:href="@{/recipes/add}">Add Recipe</a></li>
+            <li><a sec:authorize="${isAuthenticated}" th:href="@{/recipes/all}">Recipes</a></li>
             <li><a href="#">About</a></li>
-            <li><a th:href="@{/recipes/all}">Recipes</a></li>
             <li><a sec:authorize="isAnonymous()" th:href="@{/users/register}">Register</a></li>
             <li><a sec:authorize="isAnonymous()" th:href="@{/users/login}">Login</a></li>
-            <li>
+            <li sec:authorize="${isAuthenticated}">
                 <form th:method="post"
                       th:action="@{/users/logout}">
                     <input id="logout-btn" type="submit" value="Logout"/>
