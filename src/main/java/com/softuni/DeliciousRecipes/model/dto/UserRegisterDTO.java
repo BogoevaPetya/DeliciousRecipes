@@ -6,8 +6,8 @@ public class UserRegisterDTO {
     @NotNull
     @Size(min = 4, max = 20)
     private String username;
-    @NotBlank
-    @Email
+    @NotBlank(message = "{registration_requirements_email_length}")
+    @Email(message = "{registration_requirements_email_format}")
     private String email;
     @NotEmpty
     @Size(min = 3, max = 20)

@@ -25,7 +25,7 @@
                    th:errorclass="red-background"
                    id="username"
                    >
-            <span th:if="${#fields.hasErrors('username')}" class="helper">Username length must be between 4 and 20 characters!</span>
+            <span th:if="${#fields.hasErrors('username')}" th:text="#{registration_requirements_username}" class="helper">Username length must be between 4 and 20 characters!</span>
         </div>
         <div>
             <label for="email" th:text="#{register_email}">Email</label>
@@ -35,7 +35,7 @@
                    th:field="*{email}"
                    th:errorclass="red-background"
                    >
-            <span th:if="${#fields.hasErrors('email')}" class="helper">Email cannot be empty!</span>
+            <span th:each="err : ${#fields.errors('email')}" th:text="${err}" class="helper">Email cannot be empty!</span>
         </div>
         <div>
             <label for="password" th:text="#{register_password}">Password</label>
@@ -45,7 +45,7 @@
                    th:errorclass="red-background"
                    id="password"
                    >
-            <span th:if="${#fields.hasErrors('password')}" class="helper">Password length must be between 3 and 20 characters!</span>
+            <span th:if="${#fields.hasErrors('password')}" th:text="#{registration_requirements_password}" class="helper">Password length must be between 3 and 20 characters!</span>
         </div>
         <div>
             <label for="password-repeat" th:text="#{register_repeat_password}">Repeat Password</label>

@@ -13,6 +13,7 @@
 
 <section class="viewport">
     <h1 class="title" th:text="#{login_title}">Login</h1>
+    <div class="incorrect_credentials" th:if="${showErrorMessage}" th:text="#{login_invalid_message}">Incorrect username or password!</div>
     <form class="login-form"
           th:method="POST"
           th:action="@{/users/login}">

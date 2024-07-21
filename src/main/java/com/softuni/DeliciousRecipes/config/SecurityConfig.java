@@ -21,7 +21,7 @@ public class SecurityConfig {
                         authorizeRequests -> {
                             authorizeRequests
                                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                    .requestMatchers("/", "/users/login", "/users/register", "error").permitAll()
+                                    .requestMatchers("/", "/users/login", "/users/login-error", "/users/register", "error").permitAll()
                                     .anyRequest().authenticated();
                         }
                 )

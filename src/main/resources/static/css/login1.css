@@ -72,6 +72,11 @@ input[type="password"]:focus{
     opacity: 0.5;
 }
 
+.incorrect_credentials{
+    text-align: center;
+    background-color: red;
+}
+
 
 
 
