@@ -12,13 +12,13 @@
 <th:block th:replace="~{fragments/nav.html}"></th:block>
 
 <section class="viewport">
-    <h1 class="title">Register</h1>
+    <h1 class="title" th:text="#{register_title}">Register</h1>
     <form class="registration-form"
           th:method="POST"
           th:action="@{/users/register}"
           th:object="${userRegisterDTO}">
         <div>
-            <label for="username">Username</label>
+            <label for="username" th:text="#{register_username}">Username</label>
             <input type="text"
                    name="username"
                    th:field="*{username}"
@@ -28,7 +28,7 @@
             <span th:if="${#fields.hasErrors('username')}" class="helper">Username length must be between 4 and 20 characters!</span>
         </div>
         <div>
-            <label for="email">Email</label>
+            <label for="email" th:text="#{register_email}">Email</label>
             <input type="text"
                    name="email"
                    id="email"
@@ -38,7 +38,7 @@
             <span th:if="${#fields.hasErrors('email')}" class="helper">Email cannot be empty!</span>
         </div>
         <div>
-            <label for="password">Password</label>
+            <label for="password" th:text="#{register_password}">Password</label>
             <input type="password"
                    name="password"
                    th:field="*{password}"
@@ -48,7 +48,7 @@
             <span th:if="${#fields.hasErrors('password')}" class="helper">Password length must be between 3 and 20 characters!</span>
         </div>
         <div>
-            <label for="password-repeat">Repeat Password</label>
+            <label for="password-repeat" th:text="#{register_repeat_password}">Repeat Password</label>
             <input type="password"
                    name="password-repeat"
                    th:field="*{confirmPassword}"
@@ -58,12 +58,15 @@
         </div>
         <hr>
 
-        <div class="terms">By creating an account you agree to our <a href="#">Terms & Privacy</a>.</div>
+        <div class="terms">By creating an account you agree to our <a href="#" >Terms & Privacy</a>.</div>
         <input type="submit" value="Register">
 
 
         <div class="existing">
-            <p>Already have an account? <a th:href="@{users/login}">Sign in</a>.</p>
+            <p>
+                <a th:text="#{register_existing_account}">Already have an account? </a>
+                <a th:href="@{users/login}" th:text="#{login_title}">Sign in</a>.
+            </p>
         </div>
     </form>
 </section>

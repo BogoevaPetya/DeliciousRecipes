@@ -13,12 +13,18 @@
 <th:block th:replace="~{fragments/nav.html}"></th:block>
 
 <div class="container">
-    <h1>Welcome to Delicious Recipes!</h1>
-    <section>The website for the best recipes ever!
-        <div> Here you will find new interesting ideas and also you can share your favorite recipes.</div>
-        <div>No matter if you are an amateur or proffesionalist in the cooking, this is your place.</div>
+    <h1 th:text="#{home_title}">Welcome to Delicious Recipes!</h1>
+    <section>
+        <div th:text="#{home_description1}">The website for the best recipes ever!</div>
+        <div th:text="#{home_description2}">Here you will find new interesting ideas and also you can share your favorite recipes.</div>
+        <div th:text="#{home_description3}">No matter if you are an amateur or proffesionalist in the cooking, this is your place.</div>
     </section>
-    <p><a th:href="@{users/login}">Login</a> if you already have an account or <a th:href="@{users/register}">Register</a> and let's start cooking together!</p>
+    <p>
+        <a th:href="@{users/login}" th:text="#{home_login}">Login</a>
+        <a th:text="#{home_login_text}">if you already have an account or</a>
+        <a th:href="@{users/register}" th:text="#{home_register}">Register</a>
+        <a th:text="#{home_register_text}">and let's start cooking together!</a>
+    </p>
 
 </div>
 
