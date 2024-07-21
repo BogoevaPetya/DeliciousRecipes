@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ObjectNotFoundException extends RuntimeException{
     private final Object id;
 
-    public ObjectNotFoundException(String message, Object id) {
-        super(message);
+    public ObjectNotFoundException(Object id) {
         this.id = id;
     }
 

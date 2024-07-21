@@ -10,6 +10,7 @@ import com.softuni.DeliciousRecipes.model.enums.CategoryName;
 import com.softuni.DeliciousRecipes.repository.CategoryRepository;
 import com.softuni.DeliciousRecipes.repository.RecipeRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
+import com.softuni.DeliciousRecipes.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -67,12 +68,14 @@ public class RecipeService {
 
 
     public RecipeFullInfoDTO getRecipeById(Long id) {
+
         Optional<Recipe> optional = recipeRepository.findById(id);
 
-        if (optional.isEmpty()){
-            //TODO
+        if (optional.isEmpty()) {
+            throw new ObjectNotFoundException(id);
         }
 
         return modelMapper.map(optional.get(), RecipeFullInfoDTO.class);
     }
+
 }
