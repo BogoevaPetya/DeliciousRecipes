@@ -31,10 +31,14 @@
             >
         </div>
 
-        <input type="submit" value="Login">
+        <button type="submit" th:text="#{home_login}">Login</button>
 
         <div class="container signin">
-            <p>Don't have an account? <a href="#">Register</a>.</p>
+            <p>
+                <a th:text="#{login_link_for_register}">Don't have an account? </a>
+                <a th:href="@{/users/register}" th:text="#{register_title
+                }">Register</a>.
+            </p>
         </div>
     </form>
 </section>

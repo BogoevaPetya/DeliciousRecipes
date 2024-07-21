@@ -50,7 +50,7 @@ input[type="password"]:focus{
 }
 
 
-.login-form input[type="submit"]{
+.login-form button[type="submit"]{
     display: block;
     padding: 0.8em 1em;
     border: none;
@@ -62,7 +62,7 @@ input[type="password"]:focus{
     font-weight: bold;
 }
 
-.login-form input[type="submit"]:focus{
+.login-form button[type="submit"]:focus{
     background: #eee;
 }
 

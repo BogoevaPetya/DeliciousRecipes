@@ -58,3 +58,16 @@ header {
     font-weight: bold;
 }
 
+.nav-item form{
+    display: flex;
+    gap: 8px;
+    padding-top: 7px;
+}
+
+.nav-item label{
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+}
+
