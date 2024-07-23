@@ -24,7 +24,7 @@
             </div>
             <div class="favorites">
                 <i class="fas fa-heart"></i>
-                <a href="">Add to favorites</a>
+                <a th:href="@{/recipes/add-to-favorite/{id}(id=${recipeInfo.id})}">Add to favorites</a>
             </div>
             <div class="time">
                 <i class="fas fa-clock"></i>

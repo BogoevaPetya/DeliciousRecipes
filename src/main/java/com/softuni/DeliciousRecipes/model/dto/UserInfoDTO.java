@@ -9,7 +9,8 @@ public class UserInfoDTO {
     private String password;
     private List<String> roles;
     private List<CommentDTO> comments;
-    private List<RecipeFavoriteDTO> favorites;
+    private List<FoodInfoDTO> favorites;
+    private List<FoodInfoDTO> addedByMe;
 
     public Long getId() {
         return id;
@@ -59,12 +60,20 @@ public class UserInfoDTO {
         this.comments = comments;
     }
 
-    public List<RecipeFavoriteDTO> getFavorites() {
+    public List<FoodInfoDTO> getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(List<RecipeFavoriteDTO> favorites) {
+    public void setFavorites(List<FoodInfoDTO> favorites) {
         this.favorites = favorites;
+    }
+
+    public List<FoodInfoDTO> getAddedByMe() {
+        return addedByMe;
+    }
+
+    public void setAddedByMe(List<FoodInfoDTO> addedByMe) {
+        this.addedByMe = addedByMe;
     }
 }
 

@@ -27,13 +27,15 @@ public class RecipeService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final RestClient restClient;
+    private final UserService userService;
 
-    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserRepository userRepository, CategoryRepository categoryRepository, @Qualifier("recipesRestClient") RestClient restClient) {
+    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserRepository userRepository, CategoryRepository categoryRepository, @Qualifier("recipesRestClient") RestClient restClient, UserService userService) {
         this.recipeRepository = recipeRepository;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.restClient = restClient;
+        this.userService = userService;
     }
 
     public UserEntity findByUsername(String username) {
@@ -78,4 +80,22 @@ public class RecipeService {
         return modelMapper.map(optional.get(), RecipeFullInfoDTO.class);
     }
 
+    public void addToFavorites(Long id) {
+        String username = this.userService.getLoggedUsername();
+
+        Optional<UserEntity> optionalUser = this.userService.findUserByUsername(username);
+        if (optionalUser.isEmpty()) {
+            return;
+        }
+
+        UserEntity user = optionalUser.get();
+
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        if (optionalRecipe.isEmpty()){
+            return;
+        }
+
+        user.getFavoriteRecipes().add(optionalRecipe.get());
+        userRepository.save(user);
+    }
 }

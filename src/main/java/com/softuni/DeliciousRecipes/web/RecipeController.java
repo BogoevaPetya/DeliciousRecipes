@@ -80,5 +80,11 @@ public class RecipeController {
         return "recipe-info";
     }
 
+    @GetMapping("/add-to-favorite/{id}")
+    public String addToFavorite(@PathVariable Long id){
+        recipeService.addToFavorites(id);
+        return "redirect:/home";
+    }
+
 
 }

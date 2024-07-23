@@ -1,6 +1,6 @@
 package com.softuni.DeliciousRecipes.web;
 
-import com.softuni.DeliciousRecipes.model.dto.RecipeFavoriteDTO;
+import com.softuni.DeliciousRecipes.model.dto.FoodInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserDetailsDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserInfoDTO;
 import com.softuni.DeliciousRecipes.service.UserService;
@@ -31,10 +31,12 @@ public class HomeController {
 
         if (userDetails instanceof UserDetailsDTO userDetailsDTO){
             UserInfoDTO userInfo = userService.getUserDetails(userDetailsDTO.getId());
-            List<RecipeFavoriteDTO> favorites = userInfo.getFavorites();
+            List<FoodInfoDTO> favorites = userInfo.getFavorites();
+            List<FoodInfoDTO> addedByMe = userInfo.getAddedByMe();
 
             model.addAttribute("myInfo", userInfo);
-            model.addAttribute("favorites", userInfo.getFavorites());
+            model.addAttribute("favorites", favorites);
+            model.addAttribute("addedByMe", addedByMe);
         }
 
         return "home";
