@@ -12,7 +12,7 @@
 
 <th:block th:replace="~{fragments/nav.html}"></th:block>
 
-<div class="container">
+
 
     <section th:object="${myInfo}" class="profile">
         <img th:src="@{images/user-profile.png}" alt="" width="200px" height="200px">
@@ -22,44 +22,44 @@
         </div>
     </section>
 
-    <div class="main">
+    <div class="container">
 
-        <section class="my-recipes">
-            <p>ADDED BY ME</p>
-            <table>
-                <tr th:each="recipe : ${addedByMe}">
-                    <td>
-                        <img th:src="${recipe.image}" alt="" width="100px" height="100px">
-                    </td>
-                    <td th:text="${recipe.name}">Name</td>
-                    <td>Remove</td>
-                    <td><a th:href="@{/remove-from-favorites/{id}(id=${recipe.id})}">
-                        <img th:src="@{images/remove.png}" alt="Remove">
-                    </a ></td>
-                </tr>
-            </table>
-        </section>
+        <div class="main">
 
-        <section class="favorites">
-            <p>FAVORITES</p>
-            <table th:each="favorite : ${favorites}">
-                <tr>
-                    <td>
-                        <img th:src="${favorite.image}" alt="" width="100px" height="100px">
-                    </td>
-                    <td th:text="${favorite.name}"></td>
-                    <td th:text="'Added by: ' + ${favorite.addedBy}">Owner</td>
-                    <td>Remove</td>
-                    <td><a th:href="@{/remove-from-favorites/{id}(id=${favorite.id})}">
-                        <img th:src="@{images/remove.png}" alt="Remove">
-                    </a ></td>
-                </tr>
-            </table>
-        </section>
+            <section class="my-recipes">
+                <p>ADDED BY ME</p>
+                <table>
+                    <tr th:each="recipe : ${addedByMe}">
+                        <td>
+                            <img th:src="${recipe.image}" alt="" width="100px" height="100px">
+                        </td>
+                        <td class="recipe-name"><b th:text="${recipe.name}"></b></td>
+                        <td>Remove</td>
+                        <td><a th:href="@{/remove-from-favorites/{id}(id=${recipe.id})}">
+                            <img th:src="@{images/remove.png}" alt="Remove">
+                        </a ></td>
+                    </tr>
+                </table>
+            </section>
 
+            <section class="favorites">
+                <p>FAVORITES</p>
+                <table th:each="favorite : ${favorites}">
+                    <tr>
+                        <td>
+                            <img th:src="${favorite.image}" alt="" width="100px" height="100px">
+                        </td>
+                        <td class="recipe-name"><b th:text="${favorite.name}"></b></td>
+                        <td><b>Added by: </b><span th:text="${favorite.addedBy}"></span></td>
+                        <td>Remove</td>
+                        <td><a th:href="@{/remove-from-favorites/{id}(id=${favorite.id})}">
+                            <img th:src="@{images/remove.png}" alt="Remove">
+                        </a ></td>
+                    </tr>
+                </table>
+            </section>
+        </div>
     </div>
-
-</div>
 
 
 <th:block th:replace="~{fragments/footer.html}"></th:block>
