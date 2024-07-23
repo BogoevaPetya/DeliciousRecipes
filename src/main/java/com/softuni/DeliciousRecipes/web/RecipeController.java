@@ -73,6 +73,27 @@ public class RecipeController {
         return "salads";
     }
 
+    @GetMapping("/soups")
+    public String viewSoups(Model model){
+        List<RecipeShortInfoDTO> allSoups = recipeService.getAllSoups();
+        model.addAttribute("allSoups", allSoups);
+        return "soups";
+    }
+
+    @GetMapping("/main-dishes")
+    public String viewMainDishes(Model model){
+        List<RecipeShortInfoDTO> allMainDishes = recipeService.getAllMainDishes();
+        model.addAttribute("allMainDishes", allMainDishes);
+        return "main-dishes";
+    }
+
+    @GetMapping("/desserts")
+    public String viewDesserts(Model model){
+        List<RecipeShortInfoDTO> allDesserts = recipeService.getAllDesserts();
+        model.addAttribute("allDesserts", allDesserts);
+        return "desserts";
+    }
+
     @GetMapping("/{id}")
     public String viewSaladById(@PathVariable("id") Long id, Model model){
         RecipeFullInfoDTO recipe = recipeService.getRecipeById(id);

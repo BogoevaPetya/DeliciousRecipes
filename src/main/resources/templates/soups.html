@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Recipes</title>
+    <link rel="stylesheet" href="/css/salads.css">
+
+</head>
+<body>
+
+<th:block th:replace="~{fragments/nav.html}"></th:block>
+<p class="title">SOUPS</p>
+
+<div class="container">
+
+
+    <table>
+        <tr th:each="soup : ${allSoups}">
+            <td><img th:src="${soup.image}" width="260px" height="200px">
+            <td><a th:text="${soup.name}" th:href="@{/recipes/{id}(id=${soup.id})}">View</a></td>
+            <td><b>Time for cooking:</b> <span th:text="${soup.timeForCooking} + ' '"></span>minutes</td>
+
+        </tr>
+    </table>
+</div>
+
+<th:block th:replace="~{fragments/footer.html}"></th:block>
+
+</body>

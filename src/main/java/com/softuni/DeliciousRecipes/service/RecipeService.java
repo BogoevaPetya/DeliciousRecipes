@@ -68,6 +68,30 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
+    public List<RecipeShortInfoDTO> getAllSoups() {
+        List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.SOUP);
+
+        return recipes.stream()
+                .map(r -> modelMapper.map(r, RecipeShortInfoDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<RecipeShortInfoDTO> getAllMainDishes() {
+        List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.MAIN_DISH);
+
+        return recipes.stream()
+                .map(r -> modelMapper.map(r, RecipeShortInfoDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<RecipeShortInfoDTO> getAllDesserts() {
+        List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.DESSERT);
+
+        return recipes.stream()
+                .map(r -> modelMapper.map(r, RecipeShortInfoDTO.class))
+                .collect(Collectors.toList());
+    }
+
 
     public RecipeFullInfoDTO getRecipeById(Long id) {
 
@@ -98,4 +122,6 @@ public class RecipeService {
         user.getFavoriteRecipes().add(optionalRecipe.get());
         userRepository.save(user);
     }
+
+
 }
