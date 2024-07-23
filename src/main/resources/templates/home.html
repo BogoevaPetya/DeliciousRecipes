@@ -48,7 +48,7 @@
                         <img th:src="${favorite.image}" alt="" width="100px" height="100px">
                     </td>
                     <td th:text="${favorite.name}"></td>
-                    <td th:text="${favorite.addedBy}">Owner</td>
+                    <td th:text="'Added by: ' + ${favorite.addedBy}">Owner</td>
                     <td>Remove</td>
                     <td><a th:href="@{/remove-from-favorites/{id}(id=${favorite.id})}">
                         <img th:src="@{images/remove.png}" alt="Remove">

@@ -58,6 +58,7 @@ public class UserService {
 
         List<FoodInfoDTO> favorites = user.getFavoriteRecipes().stream().map(recipe -> {
             FoodInfoDTO dto = modelMapper.map(recipe, FoodInfoDTO.class);
+            dto.setAddedBy(recipe.getAddedBy().getUsername());
             return dto;
         }).toList();
 
