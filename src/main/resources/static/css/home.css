@@ -1,0 +1,43 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    max-width: 1600px;
+    /* margin-top: 2em; */
+    align-items: center;
+    /* margin-left: 3em; */
+    gap: 3em
+;
+}
+
+.profile{
+    display: flex;
+    gap: 3em;
+    border: 1px solid green;
+    border-radius: 0.6em;
+    padding: 0 10px;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    margin-top: 3em;
+}
+
+.main{
+    display: flex;
+    gap: 2em;
+}
+
+.favorites, .my-recipes{
+    border: 1px solid green;
+    border-radius: 0.5em;
+}
+
+.favorites p, .my-recipes p{
+    display: block;
+    background-color: green;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+}
