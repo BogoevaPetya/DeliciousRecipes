@@ -14,10 +14,10 @@
 <th:block th:replace="~{fragments/nav.html}"></th:block>
 
 <div class="categories">
-    <section><a th:href="@{/recipes/salads}">SALADS (count)</a></section>
-    <section><a th:href="@{/recipes/soups}">SOUPS (count)</a></section>
-    <section><a th:href="@{/recipes/main-dishes}">MAIN DISHES (count)</a></section>
-    <section><a th:href="@{/recipes/desserts}">DESSERTS (count)</a></section>
+    <section><a th:href="@{/recipes/salads}">SALADS (<span th:text="${saladsCount.size()}"></span> recipes)</a></section>
+    <section><a th:href="@{/recipes/soups}">SOUPS (<span th:text="${soupsCount.size()}"></span> recipes)</a></section>
+    <section><a th:href="@{/recipes/main-dishes}">MAIN DISHES (<span th:text="${mainDishesCount.size()}"></span> recipes)</a></section>
+    <section><a th:href="@{/recipes/desserts}">DESSERTS (<span th:text="${dessertsCount.size()}"></span> recipes)</a></section>
 </div>
 
 <th:block th:replace="~{fragments/footer.html}"></th:block>

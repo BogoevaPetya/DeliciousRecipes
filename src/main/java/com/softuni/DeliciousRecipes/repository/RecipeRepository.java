@@ -12,7 +12,5 @@ import java.util.Optional;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
-    List<Recipe> findByCategoryName(CategoryName category);
-
-
+    List<Recipe> findByCategoryName(CategoryName categoryName);
 }

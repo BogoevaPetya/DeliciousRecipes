@@ -5,16 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 
-
-
 @Configuration
 public class RestConfig {
 
-    @Bean("recipesRestClient")
-    public RestClient ordersRestClient(RecipeApiConfig recipeApiConfig){
+    @Bean("commentsRestClient")
+    public RestClient commentsRestClient(CommentApiConfig commentApiConfig){
         return RestClient
                 .builder()
-                .baseUrl(recipeApiConfig.getBaseUrl())
+                .baseUrl(commentApiConfig.getBaseUrl())
                 .defaultHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }

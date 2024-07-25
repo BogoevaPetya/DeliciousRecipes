@@ -4,8 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "recipes.api")
-public class RecipeApiConfig {
+@ConfigurationProperties(prefix = "comment.api")
+public class CommentApiConfig {
     private String baseUrl;
 
     public String getBaseUrl() {

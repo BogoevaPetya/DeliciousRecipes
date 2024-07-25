@@ -1,5 +1,7 @@
 package com.softuni.DeliciousRecipes.model.dto;
 
+import com.softuni.DeliciousRecipes.model.enums.CategoryName;
+
 public class RecipeShortInfoDTO {
     private Long id;
     private String name;

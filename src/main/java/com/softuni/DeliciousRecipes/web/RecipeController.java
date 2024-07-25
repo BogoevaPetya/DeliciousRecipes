@@ -3,6 +3,7 @@ package com.softuni.DeliciousRecipes.web;
 import com.softuni.DeliciousRecipes.model.dto.RecipeAddDTO;
 import com.softuni.DeliciousRecipes.model.dto.RecipeFullInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.RecipeShortInfoDTO;
+import com.softuni.DeliciousRecipes.model.enums.CategoryName;
 import com.softuni.DeliciousRecipes.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -62,9 +64,14 @@ public class RecipeController {
     }
 
     @GetMapping("/all")
-    public String viewAll(){
+    public String viewAll(Model model){
+        model.addAttribute("saladsCount", recipeService.getAllSalads());
+        model.addAttribute("soupsCount", recipeService.getAllSoups());
+        model.addAttribute("mainDishesCount", recipeService.getAllMainDishes());
+        model.addAttribute("dessertsCount", recipeService.getAllDesserts());
         return "all-recipes";
     }
+
 
     @GetMapping("/salads")
     public String viewSalads(Model model){
@@ -95,7 +102,7 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    public String viewSaladById(@PathVariable("id") Long id, Model model){
+    public String viewRecipeById(@PathVariable("id") Long id, Model model){
         RecipeFullInfoDTO recipe = recipeService.getRecipeById(id);
         model.addAttribute("recipeInfo", recipe);
         return "recipe-info";
