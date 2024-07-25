@@ -56,12 +56,13 @@ header {
     padding: 0.5em;
     text-transform: uppercase;
     padding-top: 10px;
+    font-weight: bold;
 }
 
 .nav-item form{
     display: flex;
     gap: 8px;
-    padding-top: 7px;
+    margin-top: 8px;
 
 }
 
@@ -76,7 +77,4 @@ li form{
     font-weight: bold;
 }
 
-#logout-btn{
-    font-weight: bold;
-}
 

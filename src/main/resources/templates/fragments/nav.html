@@ -17,7 +17,7 @@
 
             <li><a sec:authorize="${isAuthenticated}" th:href="@{/recipes/add}">Add Recipe</a></li>
             <li><a sec:authorize="${isAuthenticated}" th:href="@{/recipes/all}">Recipes</a></li>
-            <li><a href="#" th:text="#{nav_bar_about}">About</a></li>
+            <li><a sec:authorize="${isAuthenticated}" th:href="@{/comments}" th:text="#{nav_bar_comments}">Comments</a></li>
             <li><a sec:authorize="isAnonymous()" th:href="@{/users/register}" th:text="#{nav_bar_register}">Register</a></li>
             <li><a sec:authorize="isAnonymous()" th:href="@{/users/login}" th:text="#{nav_bar_login}">Login</a></li>
             <li sec:authorize="${isAuthenticated}">

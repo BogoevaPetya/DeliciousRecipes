@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Recipes</title>
+    <link rel="stylesheet" href="/css/add-comment.css">
+
+</head>
+<body>
+
+<th:block th:replace="~{fragments/nav.html}"></th:block>
+
+<section class="viewport">
+    <h1 class="title">What do you think for us?</h1>
+    <form action="action_page.php" class="add-comment-form">
+        <div>
+            <label for="name">Your name</label>
+            <input type="text"  name="name" id="name">
+            <span class="helper">Min. 8 characters, Max.20 characters</span>
+        </div>
+
+        <div>
+            <label for="instructions">Your thoughts</label>
+            <textarea type="text"
+                      class="instructions"
+                      id="instructions"
+                      name="instructions"></textarea>
+            <span class="helper">Min. 8 characters, Max.20 characters</span>
+        </div>
+
+        <div>
+            <label for="category">Please rate your experience with us!</label>
+            <select class="browser-default custom-select" id="category" name="category">
+                <option value="">Select rate</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <span class="helper">You must select a rate!</span>
+        </div>
+        <hr>
+
+        <div>
+            <form>
+                <button type="submit">Leave a comment</button>
+            </form>
+        </div>
+
+    </form>
+</section>
+
+
+<th:block th:replace="~{fragments/footer.html}"></th:block>
+
+</body>

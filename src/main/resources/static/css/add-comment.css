@@ -1,0 +1,78 @@
+.viewport{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 300px;
+    margin-top: 4em;
+}
+
+.title{
+    font-size: 33px;
+    border-bottom: 2px solid rgb(222, 226, 230);
+    margin-bottom: 1em;
+    margin-top: 1em;
+    padding-bottom: 0.2em;
+    text-align: center;
+    width: 360px;
+}
+
+.add-comment-form{
+    background: #fff;
+    opacity: 0.8;
+    display: block;
+    border: 2px;
+    border-radius: 0.3em;
+    padding: 2em;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+}
+
+.add-comment-form label{
+    display: block;
+    font-weight: bold;
+    line-height: 1;
+    padding-bottom: 0.6em;
+}
+
+.add-comment-form input,
+.add-comment-form textarea,
+.add-comment-form select{
+    display: block;
+    width: 100%;
+    padding: 0.5em 1em;
+    border: 2px solid #ccc;
+    border-radius: 0.3em;
+    outline: none;
+}
+
+.add-comment-form input:focus,
+.add-comment-form textarea:focus,
+.add-comment-form select:focus{
+    border-color: green;
+}
+
+
+.add-comment-form button[type="submit"]{
+    display: block;
+    width: 100%;
+    padding: 0.8em 1em;
+    border: none;
+    border-radius: 0.3em;
+    background: green;
+    cursor: pointer;
+    outline: none;
+    opacity: 1;
+    font-weight: bold;
+}
+
+.add-comment-form button[type="submit"]:focus{
+    background: #eee;
+}
+
+.helper{
+    font: italic;
+    font-size: 11px;
+    opacity: 0.5;
+}
