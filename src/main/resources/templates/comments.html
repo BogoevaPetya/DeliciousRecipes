@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Recipes</title>
+    <link rel="stylesheet" href="/css/comments.css">
+
+</head>
+<body>
+
+<th:block th:replace="~{fragments/nav.html}"></th:block>
+
+<div class="titles">
+    <h1>What other users say for us</h1>
+    <h3><a th:href="@{add-comment}">Add</a> your comment</h3>
+</div>
+
+
+<div class="container">
+    <section th:unless="isEmpty" class="comment">
+        <div class="info">
+            <img th:src="@{images/user-profile.png}" alt="profile-picture" width="45px" height="45px">
+            <p><b>Nikolay Nikolay</b> says:</p>
+        </div>
+    </section>
+
+</div>
+
+<th:block th:replace="~{fragments/footer.html}"></th:block>
+
+</body>
+</html>
