@@ -1,6 +1,5 @@
 package com.softuni.DeliciousRecipes.service;
 
-import com.softuni.DeliciousRecipes.model.dto.CommentDTO;
 import com.softuni.DeliciousRecipes.model.dto.FoodInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserRegisterDTO;
@@ -50,11 +49,6 @@ public class UserService {
         List<String> stringRoles = user.getRoles().stream()
                 .map(role -> role.getRole().name().toString()).toList();
 
-        List<CommentDTO> comments = user.getComments().stream()
-                .map(comment -> {
-                    CommentDTO dto = this.modelMapper.map(comment, CommentDTO.class);
-                    return dto;
-                }).toList();
 
         List<FoodInfoDTO> favorites = user.getFavoriteRecipes().stream().map(recipe -> {
             FoodInfoDTO dto = modelMapper.map(recipe, FoodInfoDTO.class);
@@ -69,7 +63,6 @@ public class UserService {
 
         UserInfoDTO userInfoDTO = this.modelMapper.map(user, UserInfoDTO.class);
         userInfoDTO.setRoles(stringRoles);
-        userInfoDTO.setComments(comments);
         userInfoDTO.setFavorites(favorites);
         userInfoDTO.setAddedByMe(addedByMe);
 

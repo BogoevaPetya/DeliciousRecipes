@@ -24,8 +24,8 @@ public class Recipe extends BaseEntity{
     private int likes;
     @Column(columnDefinition = "LONGTEXT")
     private String image;
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Comment> comments;
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private List<Comment> comments;
 
     public Recipe() {
     }
@@ -86,13 +86,6 @@ public class Recipe extends BaseEntity{
         this.likes = likes;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
 
     public String getImage() {
         return image;

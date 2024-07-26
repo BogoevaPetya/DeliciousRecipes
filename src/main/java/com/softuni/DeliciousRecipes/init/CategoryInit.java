@@ -22,8 +22,6 @@ public class CategoryInit implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (this.categoryRepository.count() == 0){
 
-            List<Category> categories = new ArrayList<>();
-
             Arrays.stream(CategoryName.values())
                     .forEach(categoryName -> {
                         Category category = new Category();

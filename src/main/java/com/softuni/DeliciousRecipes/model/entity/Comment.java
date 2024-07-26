@@ -8,27 +8,39 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "comments")
 public class Comment extends BaseEntity{
+    @Column(name = "author_name", nullable = false)
+    private String authorName;
+
     @Column(nullable = false)
-    private String text;
-    @ManyToOne
-    private UserEntity author;
+    private String comment;
+
+    @Column(nullable = false)
+    private int rate;
 
     public Comment() {
     }
 
-    public String getText() {
-        return text;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
-    public UserEntity getAuthor() {
-        return author;
+    public String getComment() {
+        return comment;
     }
 
-    public void setAuthor(UserEntity author) {
-        this.author = author;
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 }

@@ -1,6 +1,6 @@
- INSERT INTO roles VALUES (1, 'USER'), (2, 'ADMINISTRATOR');
+--  INSERT INTO roles VALUES (1, 'USER'), (2, 'ADMINISTRATOR');
 --
--- INSERT INTO users VALUES(1, 'petincka@abv.bg', '123', 'petincka');
+INSERT INTO users VALUES(1, 'petincka@abv.bg', '123', 'petincka');
 
 INSERT INTO recipes (image, ingredients, instructions, likes, name, time_for_cooking, added_by_id, category_id) VALUES
 ("/images/watermelon-salad.webp", '4 cups arugula, 3 cups watermelon, 1/4 cup mint leaves, 1/4 cup feta cheese, 2 cups chicken, balsamic vinegar, balsamic vinegar', 'Chop the watermelon into cubes, and shred the chicken, as needed. Finely slice the mint, and crumble the feta. Spread the arugula over a serving platter. Top the arugula with chicken, watermelon, feta and mint. Drizzle the salad with balsamic vinegar, and olive oil.', '0', 'Watermelon, Feta, and Mint Salad', '10', '1', '1'),

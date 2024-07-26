@@ -8,7 +8,7 @@ public class UserInfoDTO {
     private String email;
     private String password;
     private List<String> roles;
-    private List<CommentDTO> comments;
+
     private List<FoodInfoDTO> favorites;
     private List<FoodInfoDTO> addedByMe;
 
@@ -50,14 +50,6 @@ public class UserInfoDTO {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
-    }
-
-    public List<CommentDTO> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<CommentDTO> comments) {
-        this.comments = comments;
     }
 
     public List<FoodInfoDTO> getFavorites() {
