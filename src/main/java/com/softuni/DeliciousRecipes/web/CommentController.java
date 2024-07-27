@@ -17,11 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/comments")
 public class CommentController {
-    private final CommentRepository commentRepository;
     private final CommentService commentService;
 
-    public CommentController(CommentRepository commentRepository, CommentService commentService) {
-        this.commentRepository = commentRepository;
+    public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
 
@@ -44,12 +42,12 @@ public class CommentController {
         }
 
         commentService.addComment(addCommentDTO);
-        return "redirect:/comments";
+        return "redirect:/home";
     }
 
     @GetMapping("/comments")
     public String allComments(Model model){
-        if (commentRepository.count() < 0){
+        if (!commentService.hasComments()){
             model.addAttribute("isEmpty", true);
         }
         return "comments";

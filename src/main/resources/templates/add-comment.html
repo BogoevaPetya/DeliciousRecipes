@@ -18,23 +18,30 @@
           th:method="post"
           th:object="${addCommentDTO}" class="add-comment-form">
         <div >
-            <label for="name">Your name</label>
-            <input type="text"  name="name" id="name">
+            <label for="authorName">Your name</label>
+            <input type="text"
+                   th:field="*{authorName}"
+                   name="authorName"
+                   id="authorName">
             <span class="helper">Min. 8 characters, Max.20 characters</span>
         </div>
 
         <div>
-            <label for="instructions">Your thoughts</label>
+            <label for="comment">Your thoughts</label>
             <textarea type="text"
-                      class="instructions"
-                      id="instructions"
-                      name="instructions"></textarea>
+                      th:field="*{comment}"
+                      class="comment"
+                      id="comment"
+                      name="comment"></textarea>
             <span class="helper">Min. 8 characters, Max.20 characters</span>
         </div>
 
         <div>
-            <label for="category">Please rate your experience with us!</label>
-            <select class="browser-default custom-select" id="category" name="category">
+            <label for="rate">Please rate your experience with us!</label>
+            <select class="browser-default custom-select"
+                    id="rate"
+                    th:field="*{rate}"
+                    name="rate">
                 <option value="">Select rate</option>
                 <option value="1">1</option>
                 <option value="2">2</option>

@@ -18,9 +18,16 @@ public class CommentService {
     public void addComment(AddCommentDTO addCommentDTO) {
         restClient
                 .post()
-                .uri("/comments")
+                .uri("/comments/add")
                 .body(addCommentDTO)
                 .retrieve();
+    }
+
+    public boolean hasComments(){
+        if (this.commentRepository.count() > 0){
+            return true;
+        }
+        return false;
     }
 
 }
