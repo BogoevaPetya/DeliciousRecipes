@@ -114,5 +114,17 @@ public class RecipeController {
         return "redirect:/home";
     }
 
+    @DeleteMapping("/delete/{id}")
+    public String deleteRecipe(@PathVariable Long id){
+        recipeService.deleteRecipe(id);
+        return "redirect:/home";
+    }
+
+    @DeleteMapping("/remove/{id}")
+    public String removeFavoriteRecipe(@PathVariable Long id){
+        recipeService.removeFromFavorites(id);
+        return "redirect:/home";
+    }
+
 
 }

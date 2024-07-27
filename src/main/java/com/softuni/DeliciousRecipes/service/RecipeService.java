@@ -20,6 +20,7 @@ import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -117,4 +118,35 @@ public class RecipeService {
         userRepository.save(user);
     }
 
+    public void deleteRecipe(Long id) {
+        this.recipeRepository.deleteById(id);
+    }
+
+    public void removeFromFavorites(Long id) {
+        String username = this.userService.getLoggedUsername();
+
+        Optional<UserEntity> optionalUser = this.userService.findUserByUsername(username);
+        if (optionalUser.isEmpty()) {
+            return;
+        }
+
+        UserEntity user = optionalUser.get();
+
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        if (optionalRecipe.isEmpty()){
+            return;
+        }
+
+        int index = -1;
+
+        for (Recipe recipe : user.getFavoriteRecipes()) {
+            Long id1 = recipe.getId();
+            Long id2 = optionalRecipe.get().getId();
+            if (id1.equals(id2)){
+                index = user.getFavoriteRecipes().indexOf(recipe);
+            }
+        }
+        user.getFavoriteRecipes().remove(index);
+        userRepository.save(user);
+    }
 }
