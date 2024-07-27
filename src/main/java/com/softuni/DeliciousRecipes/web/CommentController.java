@@ -1,6 +1,7 @@
 package com.softuni.DeliciousRecipes.web;
 
 import com.softuni.DeliciousRecipes.model.dto.AddCommentDTO;
+import com.softuni.DeliciousRecipes.model.dto.CommentDTO;
 import com.softuni.DeliciousRecipes.model.dto.RecipeAddDTO;
 import com.softuni.DeliciousRecipes.repository.CommentRepository;
 import com.softuni.DeliciousRecipes.service.CommentService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/comments")
@@ -45,11 +48,14 @@ public class CommentController {
         return "redirect:/home";
     }
 
-    @GetMapping("/comments")
+    @GetMapping
     public String allComments(Model model){
         if (!commentService.hasComments()){
             model.addAttribute("isEmpty", true);
         }
+
+        List<CommentDTO> allComments = commentService.getAllComments();
+        model.addAttribute("allComments", allComments);
         return "comments";
     }
 }

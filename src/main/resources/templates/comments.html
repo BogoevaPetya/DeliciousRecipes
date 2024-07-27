@@ -19,10 +19,12 @@
 
 
 <div class="container">
-    <section th:unless="isEmpty" class="comment">
-        <div class="info">
+    <section class="comment">
+        <div th:each="comment : ${allComments}" class="info">
             <img th:src="@{images/user-profile.png}" alt="profile-picture" width="45px" height="45px">
-            <p><b>Nikolay Nikolay</b> says:</p>
+            <p><b th:text="${comment.authorName}"></b> says:</p>
+            <div th:text="${comment.comment}" class="comment"></div>
+            <div th:text="${comment.rate}" class="rate">Rate: </div>
         </div>
     </section>
 

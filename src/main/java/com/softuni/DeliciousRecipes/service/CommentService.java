@@ -1,9 +1,14 @@
 package com.softuni.DeliciousRecipes.service;
 
 import com.softuni.DeliciousRecipes.model.dto.AddCommentDTO;
+import com.softuni.DeliciousRecipes.model.dto.CommentDTO;
 import com.softuni.DeliciousRecipes.repository.CommentRepository;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -28,6 +33,15 @@ public class CommentService {
             return true;
         }
         return false;
+    }
+
+    public List<CommentDTO> getAllComments(){
+        return restClient
+                .get()
+                .uri("/comments")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(new ParameterizedTypeReference<>(){});
     }
 
 }
