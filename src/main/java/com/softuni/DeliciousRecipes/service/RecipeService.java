@@ -118,6 +118,38 @@ public class RecipeService {
         userRepository.save(user);
     }
 
+    public void likeRecipe(Long id){
+        String username = this.userService.getLoggedUsername();
+
+        Optional<UserEntity> optionalUser = this.userService.findUserByUsername(username);
+        if (optionalUser.isEmpty()) {
+            return;
+        }
+
+        UserEntity user = optionalUser.get();
+
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        if (optionalRecipe.isEmpty()){
+            return;
+        }
+
+        Recipe recipe = optionalRecipe.get();
+        boolean isExisting = false;
+
+        for (Recipe likedRecipe : user.getLikedRecipes()) {
+            if (likedRecipe.getId().equals(recipe.getId())){
+                isExisting = true;
+            }
+        }
+
+        if (!isExisting){
+            recipe.setLikes(recipe.getLikes() + 1);
+            user.getLikedRecipes().add(recipe);
+            this.recipeRepository.save(recipe);
+        }
+        userRepository.save(user);
+    }
+
     public void deleteRecipe(Long id) {
         this.recipeRepository.deleteById(id);
     }

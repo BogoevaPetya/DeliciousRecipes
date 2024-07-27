@@ -20,7 +20,7 @@
         <div class="features">
             <div class="likes">
                 <i class="fas fa-thumbs-up"></i>
-                <a href="">Like</a>
+                <a th:href="@{/recipes/like-recipe/{id}(id=${recipeInfo.id})}" th:text="${recipeInfo.likes} + ' likes'">Like</a>
             </div>
             <div class="favorites">
                 <i class="fas fa-heart"></i>

@@ -19,6 +19,8 @@ public class UserEntity extends BaseEntity {
     private Set<Recipe> addedRecipes;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Recipe> favoriteRecipes;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Recipe> likedRecipes;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -68,6 +70,14 @@ public class UserEntity extends BaseEntity {
 
     public void setFavoriteRecipes(List<Recipe> favoriteRecipes) {
         this.favoriteRecipes = favoriteRecipes;
+    }
+
+    public List<Recipe> getLikedRecipes() {
+        return likedRecipes;
+    }
+
+    public void setLikedRecipes(List<Recipe> likedRecipes) {
+        this.likedRecipes = likedRecipes;
     }
 
     public List<Role> getRoles() {

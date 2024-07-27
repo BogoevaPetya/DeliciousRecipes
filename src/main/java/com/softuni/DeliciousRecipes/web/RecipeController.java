@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -114,12 +115,21 @@ public class RecipeController {
         return "redirect:/home";
     }
 
+    @GetMapping("/like-recipe/{id}")
+    public String likeRecipe(@PathVariable Long id){
+        recipeService.likeRecipe(id);
+        return "redirect:/recipes/{id}";
+    }
+
+    @Transactional
     @DeleteMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable Long id){
         recipeService.deleteRecipe(id);
         return "redirect:/home";
     }
 
+
+    @Transactional
     @DeleteMapping("/remove/{id}")
     public String removeFavoriteRecipe(@PathVariable Long id){
         recipeService.removeFromFavorites(id);
