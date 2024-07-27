@@ -19,13 +19,19 @@
 
 
 <div class="container">
-    <section class="comment">
-        <div th:each="comment : ${allComments}" class="info">
+    <section class="main" th:each="comment : ${allComments}">
+        <div class="info">
             <img th:src="@{images/user-profile.png}" alt="profile-picture" width="45px" height="45px">
             <p><b th:text="${comment.authorName}"></b> says:</p>
-            <div th:text="${comment.comment}" class="comment"></div>
-            <div th:text="${comment.rate}" class="rate">Rate: </div>
         </div>
+        <div class="comment">
+            <div th:text="${comment.comment}" class="comment"></div>
+            <div class="rate"><b>Rate: </b><span th:text="${comment.rate}"></span>/<b>5</b></div>
+        </div>
+        <form th:action="@{/comments/delete/{id}(id=${comment.id})}" th:method="DELETE">
+            <button type="submit" class="delete-btn">Delete</button>
+        </form>
+
     </section>
 
 </div>

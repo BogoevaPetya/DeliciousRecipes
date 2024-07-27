@@ -9,10 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -45,7 +42,7 @@ public class CommentController {
         }
 
         commentService.addComment(addCommentDTO);
-        return "redirect:/home";
+        return "redirect:/comments";
     }
 
     @GetMapping
@@ -57,5 +54,11 @@ public class CommentController {
         List<CommentDTO> allComments = commentService.getAllComments();
         model.addAttribute("allComments", allComments);
         return "comments";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteComment(@PathVariable("id") Long id) {
+        commentService.deleteComment(id);
+        return "redirect:/comments";
     }
 }

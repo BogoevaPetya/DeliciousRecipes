@@ -35,7 +35,7 @@
                         </td>
                         <td class="recipe-name"><b th:text="${recipe.name}"></b></td>
                         <td>Remove</td>
-                        <td><a th:href="@{/remove-from-favorites/{id}(id=${recipe.id})}">
+                        <td><a th:href="@{/remove/{id}(id=${recipe.id})}">
                             <img th:src="@{images/remove.png}" alt="Remove">
                         </a ></td>
                     </tr>

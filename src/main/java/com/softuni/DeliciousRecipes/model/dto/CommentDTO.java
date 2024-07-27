@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class CommentDTO {
+    private Long id;
     private String authorName;
     private String comment;
     private Integer rate;
@@ -34,5 +35,13 @@ public class CommentDTO {
 
     public void setRate(Integer rate) {
         this.rate = rate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

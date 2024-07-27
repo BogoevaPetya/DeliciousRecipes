@@ -3,6 +3,8 @@ package com.softuni.DeliciousRecipes.service;
 import com.softuni.DeliciousRecipes.model.dto.AddCommentDTO;
 import com.softuni.DeliciousRecipes.model.dto.CommentDTO;
 import com.softuni.DeliciousRecipes.repository.CommentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Service
 public class CommentService {
+    private Logger LOGGER = LoggerFactory.getLogger(CommentService.class);
     private final CommentRepository commentRepository;
     private final RestClient restClient;
 
@@ -44,4 +47,13 @@ public class CommentService {
                 .body(new ParameterizedTypeReference<>(){});
     }
 
+    public void deleteComment(Long id) {
+        LOGGER.info("Deleting comment...");
+
+        this.restClient
+                .delete()
+                .uri("/comments/delete/{id}", id)
+                .retrieve()
+                .toBodilessEntity();
+    }
 }
