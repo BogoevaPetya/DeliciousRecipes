@@ -5,6 +5,7 @@ import com.softuni.DeliciousRecipes.model.dto.RecipeFullInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.RecipeShortInfoDTO;
 import com.softuni.DeliciousRecipes.model.enums.CategoryName;
 import com.softuni.DeliciousRecipes.service.RecipeService;
+import com.softuni.DeliciousRecipes.service.UserLikedRecipeService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,9 +23,11 @@ import java.util.List;
 @RequestMapping("/recipes")
 public class RecipeController {
     private final RecipeService recipeService;
+    private final UserLikedRecipeService userLikedRecipeService;
 
-    public RecipeController(RecipeService recipeService) {
+    public RecipeController(RecipeService recipeService, UserLikedRecipeService userLikedRecipeService) {
         this.recipeService = recipeService;
+        this.userLikedRecipeService = userLikedRecipeService;
     }
 
     @ModelAttribute
@@ -117,11 +120,10 @@ public class RecipeController {
 
     @GetMapping("/like-recipe/{id}")
     public String likeRecipe(@PathVariable Long id){
-        recipeService.likeRecipe(id);
+        userLikedRecipeService.likeRecipe(id);
         return "redirect:/recipes/{id}";
     }
 
-    @Transactional
     @DeleteMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable Long id){
         recipeService.deleteRecipe(id);
@@ -129,7 +131,6 @@ public class RecipeController {
     }
 
 
-    @Transactional
     @DeleteMapping("/remove/{id}")
     public String removeFavoriteRecipe(@PathVariable Long id){
         recipeService.removeFromFavorites(id);
