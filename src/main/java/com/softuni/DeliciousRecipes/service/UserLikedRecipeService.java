@@ -41,25 +41,14 @@ public class UserLikedRecipeService {
 
         Recipe recipe = optionalRecipe.get();
 
-        Optional<UserLikedRecipe> optionalUserLikedRecipe = userLikedRecipeRepository.findByUserId(user.getId());
-
-        if (optionalUserLikedRecipe.isEmpty()){
-            return;
-        }
-
-        if (!optionalUserLikedRecipe.get().getRecipe().getId().equals(recipe.getId())){
-            recipe.setLikes(recipe.getLikes() + 1);
-            this.recipeRepository.save(recipe);
-        }
-
-
-
         UserLikedRecipe userLikedRecipe = new UserLikedRecipe();
         userLikedRecipe.setUser(user);
         userLikedRecipe.setRecipe(recipe);
 
         userLikedRecipeRepository.save(userLikedRecipe);
     }
+
+
 
 
 }

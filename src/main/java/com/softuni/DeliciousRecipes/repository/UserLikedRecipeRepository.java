@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface UserLikedRecipeRepository extends JpaRepository<UserLikedRecipe, Long> {
 
     @Transactional
-    void deleteByRecipe(Recipe recipe);
+    void deleteByRecipeId(Long id);
 
 }
