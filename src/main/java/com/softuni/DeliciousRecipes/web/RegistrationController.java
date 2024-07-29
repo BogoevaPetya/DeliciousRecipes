@@ -2,6 +2,7 @@ package com.softuni.DeliciousRecipes.web;
 
 import com.softuni.DeliciousRecipes.model.dto.UserRegisterDTO;
 import com.softuni.DeliciousRecipes.service.UserService;
+import com.softuni.DeliciousRecipes.web.aop.WarnIfExecutionExceeds;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,7 @@ public class RegistrationController {
         return "register";
     }
 
+    @WarnIfExecutionExceeds(timeInMillis = 2000)
     @PostMapping("/register")
     public String register(@Valid UserRegisterDTO userRegisterDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors() || !userService.registerUser(userRegisterDTO)){
