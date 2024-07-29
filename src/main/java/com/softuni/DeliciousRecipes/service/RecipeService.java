@@ -12,15 +12,10 @@ import com.softuni.DeliciousRecipes.repository.RecipeRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
 import com.softuni.DeliciousRecipes.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,6 +37,7 @@ public class RecipeService {
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
+
     public boolean add(RecipeAddDTO recipeAddDTO, String username) {
         UserEntity user = findByUsername(username);
 
@@ -54,7 +50,7 @@ public class RecipeService {
         return true;
     }
 
-    public List<RecipeShortInfoDTO> getAllSalads(){
+    public List<RecipeShortInfoDTO> getAllSalads() {
         List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.SALAD);
 
 
@@ -110,7 +106,7 @@ public class RecipeService {
         UserEntity user = optionalUser.get();
 
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
-        if (optionalRecipe.isEmpty()){
+        if (optionalRecipe.isEmpty()) {
             return;
         }
 
@@ -118,39 +114,68 @@ public class RecipeService {
         userRepository.save(user);
     }
 
-//    public void likeRecipe(Long id){
-//        String username = this.userService.getLoggedUsername();
-//
-//        Optional<UserEntity> optionalUser = this.userService.findUserByUsername(username);
-//        if (optionalUser.isEmpty()) {
-//            return;
-//        }
-//
-//        UserEntity user = optionalUser.get();
-//
-//        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
-//        if (optionalRecipe.isEmpty()){
-//            return;
-//        }
-//
-//        Recipe recipe = optionalRecipe.get();
-//        boolean isExisting = false;
-//
-//        for (Recipe likedRecipe : user.getLikedRecipes()) {
-//            if (likedRecipe.getId().equals(recipe.getId())){
-//                isExisting = true;
-//            }
-//        }
-//
-//        if (!isExisting){
-//            recipe.setLikes(recipe.getLikes() + 1);
-//            user.getLikedRecipes().add(recipe);
-//            this.recipeRepository.save(recipe);
-//        }
-//        userRepository.save(user);
-//    }
+    public void likeRecipe(Long id) {
+        String username = this.userService.getLoggedUsername();
+
+        Optional<UserEntity> optionalUser = this.userService.findUserByUsername(username);
+        if (optionalUser.isEmpty()) {
+            return;
+        }
+
+        UserEntity user = optionalUser.get();
+
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        if (optionalRecipe.isEmpty()) {
+            return;
+        }
+
+        Recipe recipe = optionalRecipe.get();
+
+        for (Recipe likedRecipe : user.getLikedRecipes()) {
+            if (likedRecipe.getId().equals(recipe.getId())) {
+                return;
+            }
+        }
+
+        recipe.setLikes(recipe.getLikes() + 1);
+        recipeRepository.save(recipe);
+        user.getLikedRecipes().add(recipe);
+
+
+        userRepository.save(user);
+    }
 
     public void deleteRecipe(Long id) {
+
+        for (UserEntity user : userRepository.findAll()) {
+            int recipeIndex = -1;
+            for (Recipe likedRecipe : user.getLikedRecipes()) {
+                if (likedRecipe.getId().equals(id)) {
+                    recipeIndex = user.getLikedRecipes().indexOf(likedRecipe);
+                }
+            }
+
+            if (recipeIndex >= 0) {
+                user.getLikedRecipes().remove(recipeIndex);
+                userRepository.save(user);
+            }
+        }
+
+        for (UserEntity user : userRepository.findAll()) {
+            int recipeIndex = -1;
+            for (Recipe favoriteRecipe : user.getFavoriteRecipes()) {
+                if (favoriteRecipe.getId().equals(id)) {
+                    recipeIndex = user.getFavoriteRecipes().indexOf(favoriteRecipe);
+                }
+            }
+
+            if (recipeIndex >= 0) {
+                user.getFavoriteRecipes().remove(recipeIndex);
+                userRepository.save(user);
+            }
+        }
+
+
         this.recipeRepository.deleteById(id);
     }
 
@@ -165,7 +190,7 @@ public class RecipeService {
         UserEntity user = optionalUser.get();
 
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
-        if (optionalRecipe.isEmpty()){
+        if (optionalRecipe.isEmpty()) {
             return;
         }
 
@@ -174,7 +199,7 @@ public class RecipeService {
         for (Recipe recipe : user.getFavoriteRecipes()) {
             Long id1 = recipe.getId();
             Long id2 = optionalRecipe.get().getId();
-            if (id1.equals(id2)){
+            if (id1.equals(id2)) {
                 index = user.getFavoriteRecipes().indexOf(recipe);
             }
         }

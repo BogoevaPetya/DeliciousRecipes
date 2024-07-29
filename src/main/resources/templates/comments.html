@@ -28,7 +28,7 @@
             <div th:text="${comment.comment}" class="comment"></div>
             <div class="rate"><b>Rate: </b><span th:text="${comment.rate}"></span>/<b>5</b></div>
         </div>
-        <form th:action="@{/comments/delete/{id}(id=${comment.id})}" th:method="DELETE">
+        <form sec:authorize="hasRole('ADMINISTRATOR')" th:action="@{/comments/delete/{id}(id=${comment.id})}" th:method="DELETE">
             <button type="submit" class="delete-btn">Delete</button>
         </form>
 

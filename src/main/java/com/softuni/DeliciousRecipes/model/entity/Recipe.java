@@ -24,8 +24,6 @@ public class Recipe extends BaseEntity{
     private int likes;
     @Column(columnDefinition = "LONGTEXT")
     private String image;
-//    @OneToMany(fetch = FetchType.EAGER)
-//    private List<Comment> comments;
 
     public Recipe() {
     }
