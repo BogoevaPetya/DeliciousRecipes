@@ -18,8 +18,18 @@ public class UserEntity extends BaseEntity {
     @OneToMany(mappedBy = "addedBy", fetch = FetchType.EAGER)
     private Set<Recipe> addedRecipes;
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_favorite_recipes",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id")
+    )
     private List<Recipe> favoriteRecipes;
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_liked_recipes",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id")
+    )
     private List<Recipe> likedRecipes;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

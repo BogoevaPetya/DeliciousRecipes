@@ -3,7 +3,10 @@ package com.softuni.DeliciousRecipes.service;
 import com.softuni.DeliciousRecipes.model.dto.FoodInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserRegisterDTO;
+import com.softuni.DeliciousRecipes.model.entity.Role;
 import com.softuni.DeliciousRecipes.model.entity.UserEntity;
+import com.softuni.DeliciousRecipes.model.enums.UserRole;
+import com.softuni.DeliciousRecipes.repository.RoleRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
@@ -11,19 +14,24 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.softuni.DeliciousRecipes.model.enums.UserRole.USER;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -46,8 +54,8 @@ public class UserService {
 
         UserEntity user = optionalUser.get();
 
-        List<String> stringRoles = user.getRoles().stream()
-                .map(role -> role.getRole().name().toString()).toList();
+//        List<String> stringRoles = user.getRoles().stream()
+//                .map(role -> role.getRole().name().toString()).toList();
 
 
         List<FoodInfoDTO> favorites = user.getFavoriteRecipes().stream().map(recipe -> {
@@ -62,7 +70,6 @@ public class UserService {
         }).toList();
 
         UserInfoDTO userInfoDTO = this.modelMapper.map(user, UserInfoDTO.class);
-        userInfoDTO.setRoles(stringRoles);
         userInfoDTO.setFavorites(favorites);
         userInfoDTO.setAddedByMe(addedByMe);
 
@@ -72,6 +79,7 @@ public class UserService {
     private UserEntity map(UserRegisterDTO userRegisterDTO) {
         UserEntity mappedEntity = modelMapper.map(userRegisterDTO, UserEntity.class);
         mappedEntity.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+        mappedEntity.setRoles(List.of(roleRepository.findByRole(USER)));
         return mappedEntity;
     }
 
