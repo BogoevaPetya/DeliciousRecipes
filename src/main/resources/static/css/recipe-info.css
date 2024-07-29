@@ -9,6 +9,10 @@
     margin-bottom: 6em;
 }
 
+.container form {
+    margin-top: 1em;
+}
+
 section{
     max-width: 1200px;
     display: flex;
@@ -48,4 +52,11 @@ img{
     padding: 10px;
     margin: 15px 0;
     font-weight: bold;
+}
+
+.delete-btn{
+    background-color: red;
+    padding: 6px;
+    border: none;
+    border-radius: 0.4em;
 }

@@ -39,7 +39,7 @@
 }
 
 .delete-btn{
-    background-color: green;
+    background-color: red;
     padding: 6px;
     border: none;
     border-radius: 0.4em;

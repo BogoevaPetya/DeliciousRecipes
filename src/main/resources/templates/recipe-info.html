@@ -43,6 +43,10 @@
                     <div th:text="${recipeInfo.instructions}">Example</div>
                 </div>
             </div>
+            <form sec:authorize="hasRole('ADMINISTRATOR')" th:action="@{/recipes/delete/{id}(id=${recipeInfo.id})}" th:method="DELETE">
+                <button type="submit" class="delete-btn">Delete</button>
+            </form>
+
         </div>
     </section>
 
