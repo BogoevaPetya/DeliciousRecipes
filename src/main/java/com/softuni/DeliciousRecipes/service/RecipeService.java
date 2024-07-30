@@ -25,13 +25,15 @@ public class RecipeService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final UserService userService;
+    private final CategoryService categoryService;
 
-    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserRepository userRepository, CategoryRepository categoryRepository, UserService userService) {
+    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserRepository userRepository, CategoryRepository categoryRepository, UserService userService, CategoryService categoryService) {
         this.recipeRepository = recipeRepository;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.userService = userService;
+        this.categoryService = categoryService;
     }
 
 
@@ -42,45 +44,41 @@ public class RecipeService {
         Recipe recipe = modelMapper.map(recipeAddDTO, Recipe.class);
         recipe.setAddedBy(user);
 
-        Optional<Category> category = categoryRepository.findByName(recipeAddDTO.getCategory());
+        Optional<Category> category = categoryService.findByName(recipeAddDTO.getCategory());
         recipe.setCategory(category.get());
         recipeRepository.save(recipe);
         return true;
     }
 
+
     public List<RecipeShortInfoDTO> getAllSalads() {
-        List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.SALAD);
-
-
-        return recipes.stream()
-                .map(r -> modelMapper.map(r, RecipeShortInfoDTO.class))
-                .collect(Collectors.toList());
+        CategoryName categoryName = CategoryName.SALAD;
+        return getAllRecipesByCategory(categoryName);
     }
 
     public List<RecipeShortInfoDTO> getAllSoups() {
-        List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.SOUP);
-
-        return recipes.stream()
-                .map(r -> modelMapper.map(r, RecipeShortInfoDTO.class))
-                .collect(Collectors.toList());
+        CategoryName categoryName = CategoryName.SOUP;
+        return getAllRecipesByCategory(categoryName);
     }
 
-    public List<RecipeShortInfoDTO> getAllMainDishes() {
-        List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.MAIN_DISH);
 
-        return recipes.stream()
-                .map(r -> modelMapper.map(r, RecipeShortInfoDTO.class))
-                .collect(Collectors.toList());
+    public List<RecipeShortInfoDTO> getAllMainDishes() {
+        CategoryName categoryName = CategoryName.MAIN_DISH;
+        return getAllRecipesByCategory(categoryName);
     }
 
     public List<RecipeShortInfoDTO> getAllDesserts() {
-        List<Recipe> recipes = this.recipeRepository.findByCategoryName(CategoryName.DESSERT);
+        CategoryName categoryName = CategoryName.DESSERT;
+        return getAllRecipesByCategory(categoryName);
+    }
+
+    public List<RecipeShortInfoDTO> getAllRecipesByCategory(CategoryName categoryName) {
+        List<Recipe> recipes = this.recipeRepository.findByCategoryName(categoryName);
 
         return recipes.stream()
                 .map(r -> modelMapper.map(r, RecipeShortInfoDTO.class))
                 .collect(Collectors.toList());
     }
-
 
     public RecipeFullInfoDTO getRecipeById(Long id) {
 
@@ -138,7 +136,6 @@ public class RecipeService {
         recipe.setLikes(recipe.getLikes() + 1);
         recipeRepository.save(recipe);
         user.getLikedRecipes().add(recipe);
-
 
         userRepository.save(user);
     }
