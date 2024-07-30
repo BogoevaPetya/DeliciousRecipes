@@ -34,12 +34,10 @@ public class RecipeService {
         this.userService = userService;
     }
 
-    public UserEntity findByUsername(String username) {
-        return userRepository.findByUsername(username).orElse(null);
-    }
 
     public boolean add(RecipeAddDTO recipeAddDTO, String username) {
-        UserEntity user = findByUsername(username);
+        Optional<UserEntity> optionalUser = userService.findUserByUsername(username);
+        UserEntity user = optionalUser.get();
 
         Recipe recipe = modelMapper.map(recipeAddDTO, Recipe.class);
         recipe.setAddedBy(user);
@@ -145,65 +143,5 @@ public class RecipeService {
         userRepository.save(user);
     }
 
-    public void deleteRecipe(Long id) {
 
-        for (UserEntity user : userRepository.findAll()) {
-            int recipeIndex = -1;
-            for (Recipe likedRecipe : user.getLikedRecipes()) {
-                if (likedRecipe.getId().equals(id)) {
-                    recipeIndex = user.getLikedRecipes().indexOf(likedRecipe);
-                }
-            }
-
-            if (recipeIndex >= 0) {
-                user.getLikedRecipes().remove(recipeIndex);
-                userRepository.save(user);
-            }
-        }
-
-        for (UserEntity user : userRepository.findAll()) {
-            int recipeIndex = -1;
-            for (Recipe favoriteRecipe : user.getFavoriteRecipes()) {
-                if (favoriteRecipe.getId().equals(id)) {
-                    recipeIndex = user.getFavoriteRecipes().indexOf(favoriteRecipe);
-                }
-            }
-
-            if (recipeIndex >= 0) {
-                user.getFavoriteRecipes().remove(recipeIndex);
-                userRepository.save(user);
-            }
-        }
-
-
-        this.recipeRepository.deleteById(id);
-    }
-
-    public void removeFromFavorites(Long id) {
-        String username = this.userService.getLoggedUsername();
-
-        Optional<UserEntity> optionalUser = this.userService.findUserByUsername(username);
-        if (optionalUser.isEmpty()) {
-            return;
-        }
-
-        UserEntity user = optionalUser.get();
-
-        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
-        if (optionalRecipe.isEmpty()) {
-            return;
-        }
-
-        int index = -1;
-
-        for (Recipe recipe : user.getFavoriteRecipes()) {
-            Long id1 = recipe.getId();
-            Long id2 = optionalRecipe.get().getId();
-            if (id1.equals(id2)) {
-                index = user.getFavoriteRecipes().indexOf(recipe);
-            }
-        }
-        user.getFavoriteRecipes().remove(index);
-        userRepository.save(user);
-    }
 }

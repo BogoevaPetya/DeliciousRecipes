@@ -25,7 +25,6 @@ import static com.softuni.DeliciousRecipes.model.enums.UserRole.USER;
 public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     public UserService(UserRepository userRepository, ModelMapper modelMapper, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
@@ -54,10 +53,6 @@ public class UserService {
 
         UserEntity user = optionalUser.get();
 
-//        List<String> stringRoles = user.getRoles().stream()
-//                .map(role -> role.getRole().name().toString()).toList();
-
-
         List<FoodInfoDTO> favorites = user.getFavoriteRecipes().stream().map(recipe -> {
             FoodInfoDTO dto = modelMapper.map(recipe, FoodInfoDTO.class);
             dto.setAddedBy(recipe.getAddedBy().getUsername());
@@ -85,10 +80,6 @@ public class UserService {
 
     public Optional<UserEntity> findUserByUsername(String username) {
         return this.userRepository.findByUsername(username);
-    }
-
-    public Optional<UserEntity> findUserById(Long id) {
-        return this.userRepository.findById(id);
     }
 
     public String getLoggedUsername() {
