@@ -13,14 +13,14 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(){
-        return "login1";
+        return "login";
     }
 
     @PostMapping("/login-error")
     public String viewLoginError(Model model){
         model.addAttribute("showErrorMessage", true);
 
-        return "login1";
+        return "login";
     }
 
 }
