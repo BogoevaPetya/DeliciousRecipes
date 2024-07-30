@@ -14,7 +14,6 @@ import java.util.List;
 
 @Service
 public class CommentService {
-    private Logger LOGGER = LoggerFactory.getLogger(CommentService.class);
     private final CommentRepository commentRepository;
     private final RestClient restClient;
 
@@ -48,8 +47,6 @@ public class CommentService {
     }
 
     public void deleteComment(Long id) {
-        LOGGER.info("Deleting comment...");
-
         this.restClient
                 .delete()
                 .uri("/comments/delete/{id}", id)

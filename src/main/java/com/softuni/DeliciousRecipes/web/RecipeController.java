@@ -66,38 +66,38 @@ public class RecipeController {
 
     @GetMapping("/all")
     public String viewAll(Model model){
-        model.addAttribute("saladsCount", recipeService.getAllSalads());
-        model.addAttribute("soupsCount", recipeService.getAllSoups());
-        model.addAttribute("mainDishesCount", recipeService.getAllMainDishes());
-        model.addAttribute("dessertsCount", recipeService.getAllDesserts());
+        model.addAttribute("saladsCount", recipeService.getAllRecipesByCategory(CategoryName.SALAD));
+        model.addAttribute("soupsCount", recipeService.getAllRecipesByCategory(CategoryName.SOUP));
+        model.addAttribute("mainDishesCount", recipeService.getAllRecipesByCategory(CategoryName.MAIN_DISH));
+        model.addAttribute("dessertsCount", recipeService.getAllRecipesByCategory(CategoryName.DESSERT));
         return "all-recipes";
     }
 
 
     @GetMapping("/salads")
     public String viewSalads(Model model){
-        List<RecipeShortInfoDTO> allSalads = recipeService.getAllSalads();
+        List<RecipeShortInfoDTO> allSalads = recipeService.getAllRecipesByCategory(CategoryName.SALAD);
         model.addAttribute("allSalads", allSalads);
         return "salads";
     }
 
     @GetMapping("/soups")
     public String viewSoups(Model model){
-        List<RecipeShortInfoDTO> allSoups = recipeService.getAllSoups();
+        List<RecipeShortInfoDTO> allSoups = recipeService.getAllRecipesByCategory(CategoryName.SOUP);
         model.addAttribute("allSoups", allSoups);
         return "soups";
     }
 
     @GetMapping("/main-dishes")
     public String viewMainDishes(Model model){
-        List<RecipeShortInfoDTO> allMainDishes = recipeService.getAllMainDishes();
+        List<RecipeShortInfoDTO> allMainDishes = recipeService.getAllRecipesByCategory(CategoryName.MAIN_DISH);
         model.addAttribute("allMainDishes", allMainDishes);
         return "main-dishes";
     }
 
     @GetMapping("/desserts")
     public String viewDesserts(Model model){
-        List<RecipeShortInfoDTO> allDesserts = recipeService.getAllDesserts();
+        List<RecipeShortInfoDTO> allDesserts = recipeService.getAllRecipesByCategory(CategoryName.DESSERT);
         model.addAttribute("allDesserts", allDesserts);
         return "desserts";
     }

@@ -23,15 +23,13 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
-    private final CategoryRepository categoryRepository;
     private final UserService userService;
     private final CategoryService categoryService;
 
-    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserRepository userRepository, CategoryRepository categoryRepository, UserService userService, CategoryService categoryService) {
+    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserRepository userRepository, UserService userService, CategoryService categoryService) {
         this.recipeRepository = recipeRepository;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
-        this.categoryRepository = categoryRepository;
         this.userService = userService;
         this.categoryService = categoryService;
     }
@@ -48,28 +46,6 @@ public class RecipeService {
         recipe.setCategory(category.get());
         recipeRepository.save(recipe);
         return true;
-    }
-
-
-    public List<RecipeShortInfoDTO> getAllSalads() {
-        CategoryName categoryName = CategoryName.SALAD;
-        return getAllRecipesByCategory(categoryName);
-    }
-
-    public List<RecipeShortInfoDTO> getAllSoups() {
-        CategoryName categoryName = CategoryName.SOUP;
-        return getAllRecipesByCategory(categoryName);
-    }
-
-
-    public List<RecipeShortInfoDTO> getAllMainDishes() {
-        CategoryName categoryName = CategoryName.MAIN_DISH;
-        return getAllRecipesByCategory(categoryName);
-    }
-
-    public List<RecipeShortInfoDTO> getAllDesserts() {
-        CategoryName categoryName = CategoryName.DESSERT;
-        return getAllRecipesByCategory(categoryName);
     }
 
     public List<RecipeShortInfoDTO> getAllRecipesByCategory(CategoryName categoryName) {
@@ -106,7 +82,15 @@ public class RecipeService {
             return;
         }
 
-        user.getFavoriteRecipes().add(optionalRecipe.get());
+        Recipe recipe = optionalRecipe.get();
+
+        for (Recipe favoriteRecipe : user.getFavoriteRecipes()) {
+            if (favoriteRecipe.getId().equals(recipe.getId())) {
+                return;
+            }
+        }
+
+        user.getFavoriteRecipes().add(recipe);
         userRepository.save(user);
     }
 
