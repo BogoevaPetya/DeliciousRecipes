@@ -1,5 +1,6 @@
 package com.softuni.DeliciousRecipes.service;
 
+import com.softuni.DeliciousRecipes.model.dto.FoodInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserRegisterDTO;
 import com.softuni.DeliciousRecipes.model.entity.Role;
@@ -16,14 +17,12 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -40,6 +39,9 @@ public class UserServiceTest {
     private PasswordEncoder mockPasswordEncoder;
     @Captor
     private ArgumentCaptor<UserEntity> userEntityCaptor;
+    @Mock
+    private ModelMapper modelMapper;
+
 
     @BeforeEach
     public void setUp(){
@@ -58,6 +60,7 @@ public class UserServiceTest {
         userRegisterDTO.setUsername("test");
         userRegisterDTO.setEmail("test@test.bg");
         userRegisterDTO.setPassword("secret");
+        userRegisterDTO.setConfirmPassword("secret");
 
         when(mockPasswordEncoder.encode(userRegisterDTO.getPassword()))
                 .thenReturn(userRegisterDTO.getPassword()+userRegisterDTO.getPassword());
@@ -74,7 +77,6 @@ public class UserServiceTest {
         Assertions.assertEquals(userRegisterDTO.getUsername(), actualSavedEntity.getUsername());
         Assertions.assertEquals(userRegisterDTO.getEmail(), actualSavedEntity.getEmail());
         Assertions.assertEquals(userRegisterDTO.getPassword() + userRegisterDTO.getPassword(), actualSavedEntity.getPassword());
-
     }
 
 
@@ -92,4 +94,37 @@ public class UserServiceTest {
         assertTrue(result.isPresent());
         assertEquals(username, result.get().getUsername());
     }
+
+    @Test
+    public void testGetUserDetails(){
+        Long userId = 1L;
+        UserEntity user = new UserEntity();
+        user.setId(userId);
+        user.setUsername("test");
+        FoodInfoDTO favoriteRecipe = new FoodInfoDTO();
+        user.setFavoriteRecipes(List.of());
+        user.setAddedRecipes(Set.of());
+        user.setLikedRecipes(List.of());
+
+        when(mockUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        UserInfoDTO userInfoDTO = userServiceToTest.getUserDetails(userId);
+
+        assertNotNull(userInfoDTO);
+        verify(mockUserRepository, times(1)).findById(userId);
+    }
+
+    @Test
+    void testMap(){
+        UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
+        userRegisterDTO.setUsername("test");
+        userRegisterDTO.setEmail("test@test.bg");
+        userRegisterDTO.setPassword("secret");
+
+        userServiceToTest.map(userRegisterDTO);
+
+        Assertions.assertEquals("test", userRegisterDTO.getUsername());
+    }
+
+
 }

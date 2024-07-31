@@ -1,6 +1,9 @@
 package com.softuni.DeliciousRecipes.model.dto;
 
+import com.softuni.DeliciousRecipes.model.entity.Role;
 import jakarta.validation.constraints.*;
+
+import java.util.List;
 
 public class UserRegisterDTO {
     @NotNull
@@ -16,6 +19,8 @@ public class UserRegisterDTO {
     @NotEmpty
     @Size(min = 3, max = 20)
     private String confirmPassword;
+
+    private List<Role> roles;
 
     public String getUsername() {
         return username;
@@ -47,5 +52,13 @@ public class UserRegisterDTO {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -71,7 +71,7 @@ public class UserService {
         return userInfoDTO;
     }
 
-    private UserEntity map(UserRegisterDTO userRegisterDTO) {
+    public UserEntity map(UserRegisterDTO userRegisterDTO) {
         UserEntity mappedEntity = modelMapper.map(userRegisterDTO, UserEntity.class);
         mappedEntity.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
         mappedEntity.setRoles(List.of(roleRepository.findByRole(USER)));

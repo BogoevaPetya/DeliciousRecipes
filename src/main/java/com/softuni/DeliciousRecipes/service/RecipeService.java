@@ -42,8 +42,11 @@ public class RecipeService {
         Recipe recipe = modelMapper.map(recipeAddDTO, Recipe.class);
         recipe.setAddedBy(user);
 
-        Optional<Category> category = categoryService.findByName(recipeAddDTO.getCategory());
-        recipe.setCategory(category.get());
+        Optional<Category> optionalCategory = categoryService.findByName(recipeAddDTO.getCategory());
+        if (optionalCategory.isEmpty()){
+            return false;
+        }
+        recipe.setCategory(optionalCategory.get());
         recipeRepository.save(recipe);
         return true;
     }
