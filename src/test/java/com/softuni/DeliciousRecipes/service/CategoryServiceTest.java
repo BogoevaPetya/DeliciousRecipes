@@ -28,30 +28,18 @@ public class CategoryServiceTest {
         this.categoryServiceTestToTest = new CategoryService(mockCategoryRepository);
     }
 
-//    @Test
-//    public void testFindByName() {
-//        CategoryName categoryName = CategoryName.MAIN_DISH;
-//
-//        Category category = new Category();
-//        category.setName(categoryName);
-//
-//        when(mockCategoryRepository.getByName(categoryName)).thenReturn(Optional.of(category));
-//
-//        Category foundCategory = categoryServiceTestToTest.findByName(categoryName);
-//
-//        assertTrue(foundCategory.isPresent());
-//        assertEquals(categoryName, foundCategory.get().getName());
-//    }
-//
-//    @Test
-//    public void testFindByName_NotFound() {
-//
-//        Category category = new Category();
-//
-//        when(mockCategoryRepository.getByName(category.getName())).thenReturn(Optional.empty());
-//
-//        Optional<Category> foundCategory = categoryServiceTestToTest.findByName(category.getName());
-//
-//        assertFalse(foundCategory.isPresent());
-//    }
+    @Test
+    public void testFindByName() {
+        CategoryName categoryName = CategoryName.MAIN_DISH;
+
+        Category category = new Category();
+        category.setName(categoryName);
+
+        when(mockCategoryRepository.getByName(categoryName)).thenReturn(category);
+
+        categoryServiceTestToTest.findByName(categoryName);
+
+        assertEquals(category, categoryServiceTestToTest.findByName(categoryName));
+    }
+
 }

@@ -19,7 +19,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -83,7 +82,24 @@ public class UserServiceTest {
         Assertions.assertEquals(userRegisterDTO.getPassword() + userRegisterDTO.getPassword(), actualSavedEntity.getPassword());
     }
 
+    @Test
+    public void testRegisterUser_passwordsMismatch() {
+        //Arrange
+        UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
+        userRegisterDTO.setUsername("test");
+        userRegisterDTO.setEmail("test@test.bg");
+        userRegisterDTO.setPassword("topSecret");
+        userRegisterDTO.setConfirmPassword("secret");
 
+        Role role = new Role();
+        role.setRole(UserRole.USER);
+
+        //Act
+        boolean registered = userServiceToTest.registerUser(userRegisterDTO);
+
+        //Assert
+        Assertions.assertFalse(registered);
+    }
 
     @Test
     public void testFindUserByUsername() {
@@ -105,7 +121,6 @@ public class UserServiceTest {
         UserEntity user = new UserEntity();
         user.setId(userId);
         user.setUsername("test");
-        FoodInfoDTO favoriteRecipe = new FoodInfoDTO();
         user.setFavoriteRecipes(List.of());
         user.setAddedRecipes(Set.of());
         user.setLikedRecipes(List.of());
@@ -119,11 +134,23 @@ public class UserServiceTest {
     }
 
     @Test
+    public void testGetUserDetails_userNotFound(){
+       assertNull( userServiceToTest.getUserDetails(2L));
+    }
+
+    @Test
     void testMap(){
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
         userRegisterDTO.setUsername("test");
         userRegisterDTO.setEmail("test@test.bg");
         userRegisterDTO.setPassword("secret");
+
+        Role role = new Role();
+        role.setRole(UserRole.USER);
+        userRegisterDTO.setRoles(List.of(role));
+
+        when(mockRoleRepository.findByRole(UserRole.USER))
+                .thenReturn(role);
 
         userServiceToTest.map(userRegisterDTO);
 
