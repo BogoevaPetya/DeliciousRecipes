@@ -10,8 +10,4 @@ public class ObjectNotFoundException extends RuntimeException{
     public ObjectNotFoundException(Long id) {
         this.id = id;
     }
-
-    public Object getId() {
-        return id;
-    }
 }
