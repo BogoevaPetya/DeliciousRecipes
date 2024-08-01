@@ -7,7 +7,6 @@ import com.softuni.DeliciousRecipes.model.entity.Category;
 import com.softuni.DeliciousRecipes.model.entity.Recipe;
 import com.softuni.DeliciousRecipes.model.entity.UserEntity;
 import com.softuni.DeliciousRecipes.model.enums.CategoryName;
-import com.softuni.DeliciousRecipes.repository.CategoryRepository;
 import com.softuni.DeliciousRecipes.repository.RecipeRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
 import com.softuni.DeliciousRecipes.service.exception.ObjectNotFoundException;
@@ -35,18 +34,15 @@ public class RecipeService {
     }
 
 
-    public boolean add(RecipeAddDTO recipeAddDTO, String username) {
-        Optional<UserEntity> optionalUser = userService.findUserByUsername(username);
-        UserEntity user = optionalUser.get();
+    public boolean add(RecipeAddDTO recipeAddDTO) {
+        UserEntity user = userService.getLoggedUser();
 
         Recipe recipe = modelMapper.map(recipeAddDTO, Recipe.class);
         recipe.setAddedBy(user);
 
-        Optional<Category> optionalCategory = categoryService.findByName(recipeAddDTO.getCategory());
-        if (optionalCategory.isEmpty()){
-            return false;
-        }
-        recipe.setCategory(optionalCategory.get());
+        Category category = categoryService.findByName(recipeAddDTO.getCategory());
+        recipe.setCategory(category);
+
         recipeRepository.save(recipe);
         return true;
     }
@@ -71,14 +67,7 @@ public class RecipeService {
     }
 
     public void addToFavorites(Long id) {
-        String username = this.userService.getLoggedUsername();
-
-        Optional<UserEntity> optionalUser = this.userService.findUserByUsername(username);
-        if (optionalUser.isEmpty()) {
-            return;
-        }
-
-        UserEntity user = optionalUser.get();
+        UserEntity user = userService.getLoggedUser();
 
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
         if (optionalRecipe.isEmpty()) {
@@ -98,14 +87,7 @@ public class RecipeService {
     }
 
     public void likeRecipe(Long id) {
-        String username = this.userService.getLoggedUsername();
-
-        Optional<UserEntity> optionalUser = this.userService.findUserByUsername(username);
-        if (optionalUser.isEmpty()) {
-            return;
-        }
-
-        UserEntity user = optionalUser.get();
+        UserEntity user = userService.getLoggedUser();
 
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
         if (optionalRecipe.isEmpty()) {

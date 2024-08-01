@@ -45,8 +45,7 @@ public class RecipeController {
     @PostMapping("/add")
     public String addRecipe(@Valid RecipeAddDTO recipeAddDTO,
                             BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes,
-                            @AuthenticationPrincipal UserDetails userDetails){
+                            RedirectAttributes redirectAttributes){
 
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("recipeAddDTO", recipeAddDTO);
@@ -54,7 +53,7 @@ public class RecipeController {
             return "redirect:/recipes/add";
         }
 
-        boolean success = recipeService.add(recipeAddDTO, userDetails.getUsername());
+        boolean success = recipeService.add(recipeAddDTO);
 
         if (!success){
             redirectAttributes.addAttribute("recipeAddDTO", recipeAddDTO);

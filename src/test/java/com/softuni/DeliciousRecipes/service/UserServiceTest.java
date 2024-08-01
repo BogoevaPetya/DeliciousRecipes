@@ -65,6 +65,10 @@ public class UserServiceTest {
         when(mockPasswordEncoder.encode(userRegisterDTO.getPassword()))
                 .thenReturn(userRegisterDTO.getPassword()+userRegisterDTO.getPassword());
 
+        Role role = new Role();
+        role.setRole(UserRole.USER);
+        when(mockRoleRepository.findByRole(UserRole.USER))
+                .thenReturn(role);
         //Act
         userServiceToTest.registerUser(userRegisterDTO);
 

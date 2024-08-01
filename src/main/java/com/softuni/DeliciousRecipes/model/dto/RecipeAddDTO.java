@@ -23,6 +23,18 @@ public class RecipeAddDTO {
     private Integer timeForCooking;
     private String imageUrl;
 
+    public RecipeAddDTO() {
+    }
+
+    public RecipeAddDTO(String name, CategoryName category, String ingredients, String instructions, Integer timeForCooking, String imageUrl) {
+        this.name = name;
+        this.category = category;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+        this.timeForCooking = timeForCooking;
+        this.imageUrl = imageUrl;
+    }
+
     public String getName() {
         return name;
     }

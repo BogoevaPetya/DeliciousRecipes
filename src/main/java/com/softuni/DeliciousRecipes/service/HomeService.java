@@ -54,14 +54,7 @@ public class HomeService {
     }
 
     public void removeFromFavorites(Long id) {
-        String username = this.userService.getLoggedUsername();
-
-        Optional<UserEntity> optionalUser = this.userService.findUserByUsername(username);
-        if (optionalUser.isEmpty()) {
-            return;
-        }
-
-        UserEntity user = optionalUser.get();
+        UserEntity user = userService.getLoggedUser();
 
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
         if (optionalRecipe.isEmpty()) {

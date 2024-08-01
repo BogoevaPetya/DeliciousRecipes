@@ -3,21 +3,18 @@ package com.softuni.DeliciousRecipes.service;
 import com.softuni.DeliciousRecipes.model.dto.FoodInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.UserRegisterDTO;
-import com.softuni.DeliciousRecipes.model.entity.Role;
 import com.softuni.DeliciousRecipes.model.entity.UserEntity;
-import com.softuni.DeliciousRecipes.model.enums.UserRole;
 import com.softuni.DeliciousRecipes.repository.RoleRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
+import com.softuni.DeliciousRecipes.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.softuni.DeliciousRecipes.model.enums.UserRole.USER;
 
@@ -82,8 +79,8 @@ public class UserService {
         return this.userRepository.findByUsername(username);
     }
 
-    public String getLoggedUsername() {
+    public UserEntity getLoggedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
+        return userRepository.findByUsername(authentication.getName()).orElseThrow(IllegalArgumentException::new);
     }
 }

@@ -12,19 +12,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
-import static org.hibernate.validator.internal.util.Contracts.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -41,39 +41,99 @@ public class RecipeServiceTest {
     private CategoryService categoryServiceTestMock;
     @Mock
     private ModelMapper modelMapper;
+    private UserEntity testUser;
+    @Captor
+    private ArgumentCaptor<Recipe> captor = ArgumentCaptor.forClass(Recipe.class);
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         this.recipeServiceToTest = new RecipeService(
-                        recipeRepositoryMock,
-                        new ModelMapper(),
-                        userRepositoryMock,
-                        userServiceMock,
+                recipeRepositoryMock,
+                new ModelMapper(),
+                userRepositoryMock,
+                userServiceMock,
                 categoryServiceTestMock);
+
+        testUser = new UserEntity();
+        testUser.setUsername("testUser");
     }
 
     @Test
-    void testAddRecipe(){
-        RecipeAddDTO recipeAddDTO = new RecipeAddDTO();
+    public void testAddNotExistingRecipeToFavorite() {
+        when(userServiceMock.getLoggedUser())
+                .thenReturn(testUser);
 
-        UserEntity user = new UserEntity();
-        Recipe recipe = new Recipe();
-        Category category = new Category();
-
-        when(userServiceMock.findUserByUsername("testUser")).thenReturn(Optional.of(user));
-        when(categoryServiceTestMock.findByName(CategoryName.DESSERT)).thenReturn(Optional.of(category));
-
-        boolean present = verify(Optional.of(category)).isPresent();
-        Assertions.assertTrue(present);
-
-        boolean result = recipeServiceToTest.add(recipeAddDTO, "testUser");
-
-        Assertions.assertTrue(result);
-
-        assertEquals(user, recipe.getAddedBy());
-        assertEquals(category, recipe.getCategory());
-
+        recipeServiceToTest.addToFavorites(2L);
+        Assertions.assertEquals(0, testUser.getFavoriteRecipes().size());
     }
+
+    @Test
+    public void testAddAlreadyAddedRecipeToFavorites() {
+        Recipe recipe = new Recipe();
+        recipe.setName("Salad");
+        recipe.setId(1L);
+        testUser.getFavoriteRecipes().add(recipe);
+
+        when(userServiceMock.getLoggedUser())
+                .thenReturn(testUser);
+
+        when(recipeRepositoryMock
+                .findById(recipe.getId()))
+                .thenReturn(Optional.of(recipe));
+
+        recipeServiceToTest.addToFavorites(recipe.getId());
+
+        Assertions.assertEquals(1, testUser.getFavoriteRecipes().size());
+    }
+
+    @Test
+    public void testAddRecipeToFavorites_Success() {
+        Recipe recipe1 = new Recipe();
+        recipe1.setName("Salad");
+        recipe1.setId(1L);
+
+        Recipe recipe2 = new Recipe();
+        recipe2.setName("Soup");
+        recipe2.setId(2L);
+
+        testUser.getFavoriteRecipes().add(recipe1);
+
+        when(userServiceMock.getLoggedUser())
+                .thenReturn(testUser);
+
+        when(recipeRepositoryMock
+                .findById(recipe2.getId()))
+                .thenReturn(Optional.of(recipe2));
+
+        recipeServiceToTest.addToFavorites(recipe2.getId());
+
+        Assertions.assertEquals(2, testUser.getFavoriteRecipes().size());
+    }
+
+//    @Test
+//    public void testLikeRecipe_Success() {
+//        Recipe recipe1 = new Recipe();
+//        recipe1.setName("Salad");
+//        recipe1.setId(1L);
+//
+//        Recipe recipe2 = new Recipe();
+//        recipe2.setName("Soup");
+//        recipe2.setId(2L);
+//
+//        testUser.getFavoriteRecipes().add(recipe1);
+//
+//        when(userServiceMock.getLoggedUser())
+//                .thenReturn(testUser);
+//
+//        when(recipeRepositoryMock
+//                .findById(recipe2.getId()))
+//                .thenReturn(Optional.of(recipe2));
+//
+//        recipeServiceToTest.addToFavorites(recipe2.getId());
+//
+//        Assertions.assertEquals(2, testUser.getFavoriteRecipes().size());
+//    }
+
 
     @Test
     public void testGetAllRecipesByCategory() {
@@ -96,29 +156,32 @@ public class RecipeServiceTest {
     }
 
     @Test
-    public void testAddToFavorites() {
-        Recipe recipe = new Recipe();
-        recipe.setName("Salad");
-        recipe.setId(1L);
-        recipeRepositoryMock.save(recipe);
+    void testAddRecipe_Success() {
+        when(userServiceMock.getLoggedUser())
+                .thenReturn(testUser);
 
-        UserEntity user = new UserEntity();
-        user.setUsername("testUser");
-        List<Recipe> favorites = new ArrayList<>();
-        user.setFavoriteRecipes(favorites);
+        RecipeAddDTO recipeAddDTO = new RecipeAddDTO(
+                "Cake",
+                CategoryName.DESSERT,
+                "test ingredients",
+                "mix the products",
+                10,
+                "picture");
 
-        when(userServiceMock.getLoggedUsername()).thenReturn("testUser");
-        when(recipeRepositoryMock.findById(1L)).thenReturn(Optional.of(recipe));
+        Category category = new Category();
+        category.setName(CategoryName.DESSERT);
+        category.setId(1L);
 
+        when(categoryServiceTestMock.findByName(CategoryName.DESSERT)
+        ).thenReturn(category);
 
-        recipeServiceToTest.addToFavorites(recipe.getId());
+        recipeServiceToTest.add(recipeAddDTO);
 
-
-        Optional<UserEntity> optionalUser = userRepositoryMock.findById(user.getId());
-        UserEntity updatedUser = optionalUser.get();
-
-        assertFalse(updatedUser.getFavoriteRecipes().isEmpty());
-        assertEquals(1L, updatedUser.getFavoriteRecipes().size());
-        assertEquals(recipe.getId(), updatedUser.getFavoriteRecipes().iterator().next().getId());
+        verify(recipeRepositoryMock).save(captor.capture());
     }
+
+
 }
+
+
+

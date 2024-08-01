@@ -5,8 +5,6 @@ import com.softuni.DeliciousRecipes.model.enums.CategoryName;
 import com.softuni.DeliciousRecipes.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
@@ -15,7 +13,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Optional<Category> findByName(CategoryName name) {
-        return this.categoryRepository.findByName(name);
+    public Category findByName(CategoryName name) {
+        return this.categoryRepository.getByName(name);
     }
 }

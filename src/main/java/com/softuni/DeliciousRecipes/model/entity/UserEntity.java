@@ -3,6 +3,7 @@ package com.softuni.DeliciousRecipes.model.entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,21 +17,21 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
     @OneToMany(mappedBy = "addedBy", fetch = FetchType.EAGER)
-    private Set<Recipe> addedRecipes;
+    private Set<Recipe> addedRecipes = new HashSet<>();
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_favorite_recipes",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
-    private List<Recipe> favoriteRecipes;
+    private List<Recipe> favoriteRecipes = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_liked_recipes",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
-    private List<Recipe> likedRecipes;
+    private List<Recipe> likedRecipes = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -39,8 +40,7 @@ public class UserEntity extends BaseEntity {
     )
     private List<Role> roles = new ArrayList<>();
 
-    public UserEntity() {
-    }
+    public UserEntity() {}
 
     public String getUsername() {
         return username;
