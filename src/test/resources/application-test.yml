@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:hsqldb:mem:testdb;sql.syntax_mys=true
+    url: jdbc:hsqldb:mem:recipes;sql.syntax_mys=true
+    driver-class-name: org.hsqldb.jdbcDriver
   sql:
     init:
       mode: never

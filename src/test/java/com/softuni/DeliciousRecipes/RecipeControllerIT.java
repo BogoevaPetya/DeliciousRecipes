@@ -6,8 +6,10 @@ import com.softuni.DeliciousRecipes.service.RecipeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
+
 public class RecipeControllerIT {
     @Autowired
     private RecipeService recipeService;
