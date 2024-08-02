@@ -83,4 +83,8 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findByUsername(authentication.getName()).orElseThrow(IllegalArgumentException::new);
     }
+
+    public String getLoggedUserUsername() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
 }

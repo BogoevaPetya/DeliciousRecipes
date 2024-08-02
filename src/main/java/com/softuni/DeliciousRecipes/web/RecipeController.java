@@ -5,7 +5,9 @@ import com.softuni.DeliciousRecipes.model.dto.RecipeFullInfoDTO;
 import com.softuni.DeliciousRecipes.model.dto.RecipeShortInfoDTO;
 import com.softuni.DeliciousRecipes.model.enums.CategoryName;
 import com.softuni.DeliciousRecipes.service.RecipeService;
+import com.softuni.DeliciousRecipes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -106,6 +108,12 @@ public class RecipeController {
         RecipeFullInfoDTO recipe = recipeService.getRecipeById(id);
         model.addAttribute("recipeInfo", recipe);
         return "recipe-info";
+    }
+
+    @ExceptionHandler(ObjectNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleOnfe(){
+        return "object-not-found";
     }
 
     @GetMapping("/add-to-favorite/{id}")

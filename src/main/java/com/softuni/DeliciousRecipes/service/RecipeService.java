@@ -109,5 +109,10 @@ public class RecipeService {
         userRepository.save(user);
     }
 
+    public boolean isActualUser(Long id){
+        return recipeRepository.findById(id)
+                .filter(e -> e.getAddedBy().getUsername().equals(userService.getLoggedUserUsername())).isPresent();
+    }
+
 
 }

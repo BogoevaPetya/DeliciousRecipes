@@ -48,6 +48,7 @@ public class HomeController {
         return "home";
     }
 
+
     @DeleteMapping("/recipes/delete/{id}")
     public String deleteRecipe(@PathVariable Long id){
         homeService.deleteRecipe(id);

@@ -4,6 +4,7 @@ import com.softuni.DeliciousRecipes.model.entity.Recipe;
 import com.softuni.DeliciousRecipes.model.entity.UserEntity;
 import com.softuni.DeliciousRecipes.repository.RecipeRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class HomeService {
         this.userService = userService;
     }
 
+    @PreAuthorize("@recipeService.isActualUser(#id) || hasRole('ADMINISTRATOR')")
     public void deleteRecipe(Long id) {
 
         for (UserEntity user : userRepository.findAll()) {
@@ -73,4 +75,5 @@ public class HomeService {
         user.getFavoriteRecipes().remove(index);
         userRepository.save(user);
     }
+
 }

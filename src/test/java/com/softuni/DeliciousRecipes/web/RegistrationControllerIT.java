@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -20,10 +21,20 @@ public class RegistrationControllerIT {
     @Test
     void testRegistration() throws Exception {
         mockMvc.perform(post("/users/register")
-                .param("email", "petincka@example.com")
-                .param("username", "petincka")
-                .param("password", "topSecret")
+                .formField("email", "petincka@example.com")
+                .formField("username", "petincka")
+                .formField("password", "topSecret")
+                        .formField("confirmPassword", "topSecret")
+                        .with(csrf())
         ).andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/"));
+                .andExpect(redirectedUrl("/users/login"));
+    }
+
+    @Test
+    void testRegistration_failed() throws Exception {
+        mockMvc.perform(post("/users/register")
+                        .with(csrf())
+                ).andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/users/register"));
     }
 }
