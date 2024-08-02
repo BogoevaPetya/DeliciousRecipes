@@ -1,7 +1,15 @@
 spring:
+  profiles: "test"
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
   datasource:
-    url: jdbc:hsqldb:mem:recipes;sql.syntax_mys=true
-    driver-class-name: org.hsqldb.jdbcDriver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
   sql:
     init:
       mode: never
@@ -20,5 +28,3 @@ logging:
     blog: WARN
 server:
   port: 8080
-
-
