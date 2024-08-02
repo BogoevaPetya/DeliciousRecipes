@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -215,6 +216,49 @@ public class RecipeServiceTest {
                 ObjectNotFoundException.class, () -> recipeServiceToTest.getRecipeById(2L));
     }
 
+    @Test
+    void testDeleteRecipeById(){
+        UserEntity user1 = new UserEntity();
+        user1.setUsername("Pesho");
+
+        UserEntity user2 = new UserEntity();
+        user2.setUsername("Gosho");
+
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        user1.getFavoriteRecipes().add(recipe);
+        user2.getLikedRecipes().add(recipe);
+
+        List<UserEntity> allUsers = new ArrayList<>();
+        allUsers.add(user1);
+        allUsers.add(user2);
+
+        when(userRepositoryMock.findAll()).thenReturn(allUsers);
+
+        recipeServiceToTest.deleteRecipe(1L);
+
+        Assertions.assertEquals(0, user1.getFavoriteRecipes().size());
+        Assertions.assertEquals(0, user2.getLikedRecipes().size());
+    }
+
+    @Test
+    void testRemoveRecipeFromFavorites() {
+        UserEntity user = new UserEntity();
+        user.setUsername("Pesho");
+
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        recipe.setName("Moussaka");
+
+        user.getFavoriteRecipes().add(recipe);
+
+        when(userServiceMock.getLoggedUser()).thenReturn(user);
+        when(recipeRepositoryMock.findById(1L)).thenReturn(Optional.of(recipe));
+
+        recipeServiceToTest.removeFromFavorites(1L);
+        Assertions.assertEquals(0, user.getFavoriteRecipes().size());
+    }
 
 
 }

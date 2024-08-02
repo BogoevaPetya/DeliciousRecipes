@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CategoriesInit implements CommandLineRunner {
+public class CategoryInit implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
 
-    public CategoriesInit(CategoryRepository categoryRepository) {
+    public CategoryInit(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 

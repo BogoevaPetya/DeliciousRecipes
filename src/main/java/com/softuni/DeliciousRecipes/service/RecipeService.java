@@ -11,6 +11,7 @@ import com.softuni.DeliciousRecipes.repository.RecipeRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
 import com.softuni.DeliciousRecipes.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -109,10 +110,64 @@ public class RecipeService {
         userRepository.save(user);
     }
 
+    @PreAuthorize("@recipeService.isActualUser(#id) || hasRole('ADMINISTRATOR')")
+    public void deleteRecipe(Long id) {
+
+        for (UserEntity user : userRepository.findAll()) {
+            int recipeIndex = -1;
+            for (Recipe likedRecipe : user.getLikedRecipes()) {
+                if (likedRecipe.getId().equals(id)) {
+                    recipeIndex = user.getLikedRecipes().indexOf(likedRecipe);
+                }
+            }
+
+            if (recipeIndex >= 0) {
+                user.getLikedRecipes().remove(recipeIndex);
+                userRepository.save(user);
+            }
+        }
+
+        for (UserEntity user : userRepository.findAll()) {
+            int recipeIndex = -1;
+            for (Recipe favoriteRecipe : user.getFavoriteRecipes()) {
+                if (favoriteRecipe.getId().equals(id)) {
+                    recipeIndex = user.getFavoriteRecipes().indexOf(favoriteRecipe);
+                }
+            }
+
+            if (recipeIndex >= 0) {
+                user.getFavoriteRecipes().remove(recipeIndex);
+                userRepository.save(user);
+            }
+        }
+
+        this.recipeRepository.deleteById(id);
+    }
+
+    public void removeFromFavorites(Long id) {
+        UserEntity user = userService.getLoggedUser();
+
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        if (optionalRecipe.isEmpty()) {
+            return;
+        }
+
+        int index = -1;
+
+        for (Recipe recipe : user.getFavoriteRecipes()) {
+            Long id1 = recipe.getId();
+            Long id2 = optionalRecipe.get().getId();
+            if (id1.equals(id2)) {
+                index = user.getFavoriteRecipes().indexOf(recipe);
+            }
+        }
+        user.getFavoriteRecipes().remove(index);
+        userRepository.save(user);
+    }
+
     public boolean isActualUser(Long id){
         return recipeRepository.findById(id)
                 .filter(e -> e.getAddedBy().getUsername().equals(userService.getLoggedUserUsername())).isPresent();
     }
-
 
 }
