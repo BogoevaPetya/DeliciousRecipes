@@ -1,12 +1,6 @@
 spring:
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: 'TRUE'
-    hibernate:
-      ddl-auto: update
-    open-in-view: 'false'
+  datasource:
+    url: jdbc:hsqldb:mem:testdb;sql.syntax_mys=true
   sql:
     init:
       mode: never
