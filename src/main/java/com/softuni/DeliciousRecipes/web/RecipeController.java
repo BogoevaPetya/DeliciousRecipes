@@ -112,7 +112,8 @@ public class RecipeController {
 
     @ExceptionHandler(ObjectNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleOnfe(){
+    public String handleOnfe(Model model, ObjectNotFoundException onfe){
+        model.addAttribute("message", onfe.getMessage());
         return "object-not-found";
     }
 

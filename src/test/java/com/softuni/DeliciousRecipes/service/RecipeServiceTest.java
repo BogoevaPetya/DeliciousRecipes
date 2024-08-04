@@ -90,8 +90,8 @@ public class RecipeServiceTest {
         when(userServiceMock.getLoggedUser())
                 .thenReturn(testUser);
 
-        recipeServiceToTest.addToFavorites(2L);
-        Assertions.assertEquals(0, testUser.getFavoriteRecipes().size());
+        Assertions.assertThrows(
+                ObjectNotFoundException.class, () -> recipeServiceToTest.addToFavorites(3L));
     }
 
     @Test

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delicious Recipes</title>
-    <link rel="stylesheet" href="/css/error/403.css">
+    <link rel="stylesheet" href="/css/error/400.css">
 
 </head>
 <body>
@@ -13,8 +13,8 @@
 <th:block th:replace="~{fragments/nav.html}"></th:block>
 
 <div class="container">
-    <h1>Internal Server Error</h1>
-    <div>We apologize for the inconvenience! Please go to the <a th:href="@{/}">home</a> page and try again later!</div>
+    <h1>Error 400</h1>
+    <div>You have sent a bad request! Please go to the <a th:href="@{/}">home</a> page!</div>
 </div>
 
 <th:block th:replace="~{fragments/footer.html}"></th:block>

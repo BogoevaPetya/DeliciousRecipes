@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delicious Recipes</title>
-    <link rel="stylesheet" href="/css/error/object-not-found.css">
+    <link rel="stylesheet" href="/css/object-not-found.css">
 
 </head>
 <body>
@@ -13,8 +13,9 @@
 <th:block th:replace="~{fragments/nav.html}"></th:block>
 
 <div class="container">
-    <h1>Something went wrong</h1>
-    <div>Oops! Object was not found! Please go to the <a th:href="@{/}">home</a> page!</div>
+    <h1>Oops! Something went wrong...</h1>
+    <div th:text="${message}"></div>
+    <div>Please go to the <a th:href="@{/}">home</a> page!</div>
 </div>
 
 <th:block th:replace="~{fragments/footer.html}"></th:block>

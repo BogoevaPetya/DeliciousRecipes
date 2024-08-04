@@ -9,7 +9,6 @@ import com.softuni.DeliciousRecipes.model.entity.UserEntity;
 import com.softuni.DeliciousRecipes.model.enums.CategoryName;
 import com.softuni.DeliciousRecipes.repository.RecipeRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
-import com.softuni.DeliciousRecipes.service.exception.DeleteObjectException;
 import com.softuni.DeliciousRecipes.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -59,13 +58,13 @@ public class RecipeService {
 
     public RecipeFullInfoDTO getRecipeById(Long id) {
 
-        Optional<Recipe> optional = recipeRepository.findById(id);
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
 
-        if (optional.isEmpty()) {
-            throw new ObjectNotFoundException();
+        if (optionalRecipe.isEmpty()) {
+            throw new ObjectNotFoundException("This recipe is not existing.");
         }
 
-        return modelMapper.map(optional.get(), RecipeFullInfoDTO.class);
+        return modelMapper.map(optionalRecipe.get(), RecipeFullInfoDTO.class);
     }
 
     public void addToFavorites(Long id) {
@@ -73,7 +72,7 @@ public class RecipeService {
 
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
         if (optionalRecipe.isEmpty()) {
-            return;
+            throw new ObjectNotFoundException("This recipe is not existing.");
         }
 
         Recipe recipe = optionalRecipe.get();
@@ -93,7 +92,7 @@ public class RecipeService {
 
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
         if (optionalRecipe.isEmpty()) {
-            return;
+            throw new ObjectNotFoundException("This recipe is not existing.");
         }
 
         Recipe recipe = optionalRecipe.get();
@@ -113,11 +112,6 @@ public class RecipeService {
 
     @PreAuthorize("@recipeService.isActualUser(#id) || hasRole('ADMINISTRATOR')")
     public void deleteRecipe(Long id) {
-
-        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
-        if (optionalRecipe.isEmpty()) {
-            throw new DeleteObjectException("You cannot delete the requested recipe!");
-        }
 
         for (UserEntity user : userRepository.findAll()) {
             int recipeIndex = -1;
