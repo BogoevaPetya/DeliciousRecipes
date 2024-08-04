@@ -14,11 +14,11 @@ public class UserRegisterDTO {
     @Email(message = "{registration_requirements_email_format}")
     private String email;
     @NotEmpty
-    @Size(min = 3, max = 20)
+    @Size(min = 5, max = 20)
     private String password;
 
     @NotEmpty
-    @Size(min = 3, max = 20)
+    @Size(min = 5, max = 20)
     private String confirmPassword;
 
     private List<Role> roles = new ArrayList<>();

@@ -45,7 +45,7 @@
                    th:errorclass="red-background"
                    id="password"
                    >
-            <span th:if="${#fields.hasErrors('password')}" th:text="#{registration_requirements_password}" class="helper">Password length must be between 3 and 20 characters!</span>
+            <span th:if="${#fields.hasErrors('password')}" th:text="#{registration_requirements_password}" class="helper">Password length must be between 5 and 20 characters!</span>
         </div>
         <div>
             <label for="password-repeat" th:text="#{register_repeat_password}">Repeat Password</label>
@@ -56,7 +56,6 @@
                    id="password-repeat" >
             <span th:if="${#fields.hasErrors('confirmPassword')}" class="helper"></span>
         </div>
-        <hr>
 
         <button type="submit" th:text="#{home_login}">Login</button>
 
@@ -64,7 +63,7 @@
         <div class="existing">
             <p>
                 <a th:text="#{register_existing_account}">Already have an account? </a>
-                <a th:href="@{users/login}" th:text="#{login_title}">Sign in</a>.
+                <a th:href="@{/users/login}" th:text="#{login_title}">Sign in</a>.
             </p>
         </div>
     </form>

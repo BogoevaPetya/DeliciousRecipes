@@ -60,6 +60,7 @@ button[type="submit"]{
     outline: none;
     opacity: 1;
     font-weight: bold;
+    margin-top: 1em;
 }
 
 button[type="submit"]:focus{

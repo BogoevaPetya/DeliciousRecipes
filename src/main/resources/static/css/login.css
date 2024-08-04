@@ -60,6 +60,7 @@ input[type="password"]:focus{
     outline: none;
     opacity: 1;
     font-weight: bold;
+    margin-top: 1em;
 }
 
 .login-form button[type="submit"]:focus{
