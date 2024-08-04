@@ -1,6 +1,7 @@
 package com.softuni.DeliciousRecipes.init;
 
 import com.softuni.DeliciousRecipes.model.entity.Category;
+import com.softuni.DeliciousRecipes.model.entity.Role;
 import com.softuni.DeliciousRecipes.model.enums.CategoryName;
 import com.softuni.DeliciousRecipes.repository.CategoryRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -20,6 +21,7 @@ public class CategoryInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (categoryRepository.count() <= 0){
+
             List<Category> categories = new ArrayList<>();
 
             Category soup = new Category();
@@ -27,8 +29,8 @@ public class CategoryInit implements CommandLineRunner {
             categories.add(soup);
 
             Category salad = new Category();
-            soup.setName(CategoryName.SALAD);
-            categories.add(soup);
+            salad.setName(CategoryName.SALAD);
+            categories.add(salad);
 
             Category dessert = new Category();
             dessert.setName(CategoryName.DESSERT);

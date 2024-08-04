@@ -27,7 +27,7 @@
     flex-direction: column;
 }
 
-label{
+.registration-form label{
     display: block;
     font-weight: bold;
     line-height: 1;

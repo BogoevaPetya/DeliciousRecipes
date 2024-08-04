@@ -27,7 +27,7 @@
     flex-direction: column;
 }
 
-label{
+.login-form label{
     display: block;
     font-weight: bold;
     line-height: 1;
