@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.time.Instant;
+
 @Entity
 @Table(name = "comments")
 public class Comment extends BaseEntity{
@@ -17,7 +19,17 @@ public class Comment extends BaseEntity{
     @Column(nullable = false)
     private int rate;
 
+    private Instant created = Instant.now();
+
     public Comment() {
+    }
+
+    public Instant getCreated() {
+        return created;
+    }
+
+    public void setCreated(Instant created) {
+        this.created = created;
     }
 
     public String getAuthorName() {

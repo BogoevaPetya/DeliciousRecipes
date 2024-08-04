@@ -3,8 +3,6 @@ package com.softuni.DeliciousRecipes.service;
 import com.softuni.DeliciousRecipes.model.dto.AddCommentDTO;
 import com.softuni.DeliciousRecipes.model.dto.CommentDTO;
 import com.softuni.DeliciousRecipes.repository.CommentRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;

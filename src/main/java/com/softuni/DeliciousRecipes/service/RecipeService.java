@@ -9,6 +9,7 @@ import com.softuni.DeliciousRecipes.model.entity.UserEntity;
 import com.softuni.DeliciousRecipes.model.enums.CategoryName;
 import com.softuni.DeliciousRecipes.repository.RecipeRepository;
 import com.softuni.DeliciousRecipes.repository.UserRepository;
+import com.softuni.DeliciousRecipes.service.exception.DeleteObjectException;
 import com.softuni.DeliciousRecipes.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -61,7 +62,7 @@ public class RecipeService {
         Optional<Recipe> optional = recipeRepository.findById(id);
 
         if (optional.isEmpty()) {
-            throw new ObjectNotFoundException(id);
+            throw new ObjectNotFoundException();
         }
 
         return modelMapper.map(optional.get(), RecipeFullInfoDTO.class);
@@ -112,6 +113,11 @@ public class RecipeService {
 
     @PreAuthorize("@recipeService.isActualUser(#id) || hasRole('ADMINISTRATOR')")
     public void deleteRecipe(Long id) {
+
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        if (optionalRecipe.isEmpty()) {
+            throw new DeleteObjectException("You cannot delete the requested recipe!");
+        }
 
         for (UserEntity user : userRepository.findAll()) {
             int recipeIndex = -1;

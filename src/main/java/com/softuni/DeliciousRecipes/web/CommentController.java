@@ -6,6 +6,7 @@ import com.softuni.DeliciousRecipes.model.dto.RecipeAddDTO;
 import com.softuni.DeliciousRecipes.repository.CommentRepository;
 import com.softuni.DeliciousRecipes.service.CommentService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
