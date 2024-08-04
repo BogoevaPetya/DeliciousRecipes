@@ -80,11 +80,6 @@ button[type="submit"]:focus{
     background-color: red;
 }
 
-.terms{
-    font-size: 10px;
-    margin-top: 0px;
-    text-align: center;
-}
 
 .existing{
     text-align: center;

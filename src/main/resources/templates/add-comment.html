@@ -21,19 +21,22 @@
             <label for="authorName">Your name</label>
             <input type="text"
                    th:field="*{authorName}"
+                   th:errorclass="red-background"
                    name="authorName"
                    id="authorName">
-            <span class="helper">Min. 8 characters, Max.20 characters</span>
+            <span th:if="${#fields.hasErrors('authorName')}" th:text="#{registration_requirements_username}" class="helper">Username length must be between 3 and 30 characters!</span>
         </div>
 
         <div>
             <label for="comment">Your thoughts</label>
             <textarea type="text"
                       th:field="*{comment}"
+                      th:errorclass="red-background"
                       class="comment"
                       id="comment"
                       name="comment"></textarea>
-            <span class="helper">Min. 8 characters, Max.20 characters</span>
+            <span th:if="${#fields.hasErrors('comment')}" class="helper">Your comment must contain minimum 5 characters!</span>
+
         </div>
 
         <div>
@@ -41,6 +44,7 @@
             <select class="browser-default custom-select"
                     id="rate"
                     th:field="*{rate}"
+                    th:errorclass="red-background"
                     name="rate">
                 <option value="">Select rate</option>
                 <option value="1">1</option>
@@ -49,7 +53,7 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-            <span class="helper">You must select a rate!</span>
+            <span th:if="${#fields.hasErrors('rate')}" class="helper">You must select a rate!</span>
         </div>
         <hr>
 
