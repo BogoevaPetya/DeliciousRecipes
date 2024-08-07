@@ -75,10 +75,6 @@ public class UserService {
         return mappedEntity;
     }
 
-    public Optional<UserEntity> findUserByUsername(String username) {
-        return this.userRepository.findByUsername(username);
-    }
-
     public UserEntity getLoggedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findByUsername(authentication.getName()).orElseThrow(IllegalArgumentException::new);

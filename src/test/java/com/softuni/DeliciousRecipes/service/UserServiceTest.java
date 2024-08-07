@@ -107,19 +107,6 @@ public class UserServiceTest {
         Assertions.assertFalse(registered);
     }
 
-    @Test
-    public void testFindUserByUsername() {
-        String username = "test";
-        UserEntity user = new UserEntity();
-        user.setUsername(username);
-
-        when(mockUserRepository.findByUsername(username)).thenReturn(Optional.of(user));
-
-        Optional<UserEntity> result = userServiceToTest.findUserByUsername(username);
-
-        assertTrue(result.isPresent());
-        assertEquals(username, result.get().getUsername());
-    }
 
     @Test
     public void testGetUserDetails(){

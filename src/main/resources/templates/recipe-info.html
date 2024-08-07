@@ -15,7 +15,7 @@
     <section th:object="${recipeInfo}">
         <div class="photo">
             <h1 th:text="${recipeInfo.name}">Title</h1>
-            <img th:src="${recipeInfo.image}" alt="dessert" width="260px" height="200px">
+            <img th:src="${recipeInfo.image}" alt="photo" width="260px" height="200px">
         </div>
         <div class="features">
             <div class="likes">
@@ -36,11 +36,11 @@
             <div class="main">
                 <div>
                     <p>INGREDIENTS:</p>
-                    <div th:text="${recipeInfo.ingredients}"></div>
+                    <div th:text="${recipeInfo.ingredients}" class="text"></div>
                 </div>
                 <div>
                     <p>HOW TO PREPARE:</p>
-                    <div th:text="${recipeInfo.instructions}">Example</div>
+                    <div th:text="${recipeInfo.instructions}" class="text">Example</div>
                 </div>
             </div>
             <form sec:authorize="hasRole('ADMINISTRATOR')" th:action="@{/recipes/delete/{id}(id=${recipeInfo.id})}" th:method="DELETE">

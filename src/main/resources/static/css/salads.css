@@ -27,6 +27,8 @@ table tr{
     flex-direction: column;
     margin: 0 auto;
     background-color: antiquewhite;
+    width: 260px;
+    height: 250px;
 }
 
 td a{

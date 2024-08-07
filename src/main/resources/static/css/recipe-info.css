@@ -31,6 +31,7 @@ section{
     display: flex;
     margin: 0 auto;
     gap: 2em;
+    font-size: medium;
 }
 
 img{
@@ -59,4 +60,11 @@ img{
     padding: 6px;
     border: none;
     border-radius: 0.4em;
+}
+
+.text{
+    text-align: justify;
+    font-weight: 500;
+    font-size: medium;
+    line-height: 2em;
 }
