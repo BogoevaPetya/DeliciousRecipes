@@ -1,8 +1,12 @@
 spring:
+  sql:
+    init:
+      mode: never
   jpa:
     hibernate:
       ddl-auto: create-drop
     open-in-view: false
+    defer-datasource-initialization: true
   mvc:
     hiddenmethod:
       filter:

@@ -32,19 +32,19 @@ public class RegistrationControllerIT {
     @Test
     void testRegistration() throws Exception {
         mockMvc.perform(post("/users/register")
-                .formField("email", "petincka@example.com")
-                .formField("username", "petincka")
+                .formField("email", "niki@example.com")
+                .formField("username", "nickichka")
                 .formField("password", "topSecret")
                         .formField("confirmPassword", "topSecret")
                         .with(csrf())
         ).andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/users/login"));
 
-        Optional<UserEntity> userEntityOptional = userRepositoryMock.findByUsername("petincka");
+        Optional<UserEntity> userEntityOptional = userRepositoryMock.findByUsername("nickichka");
         Assertions.assertTrue(userEntityOptional.isPresent());
 
         UserEntity user = userEntityOptional.get();
-        Assertions.assertEquals("petincka", user.getUsername());
+        Assertions.assertEquals("nickichka", user.getUsername());
     }
 
     @Test
